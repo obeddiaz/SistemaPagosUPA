@@ -1,0 +1,327 @@
+[2014-07-27 04:16:30] production.ERROR: exception 'InvalidArgumentException' with message 'There are no commands defined in the "generate" namespace.' in K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php:516
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(550): Symfony\Component\Console\Application->findNamespace('generate')
+#1 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(190): Symfony\Component\Console\Application->find('generate:resour...')
+#2 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(124): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 K:\Lastest Projects\upa_pagos\artisan(59): Symfony\Component\Console\Application->run()
+#4 {main} [] []
+[2014-07-27 04:19:47] production.ERROR: exception 'InvalidArgumentException' with message 'There are no commands defined in the "generate" namespace.' in K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php:516
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(550): Symfony\Component\Console\Application->findNamespace('generate')
+#1 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(190): Symfony\Component\Console\Application->find('generate:resour...')
+#2 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(124): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 K:\Lastest Projects\upa_pagos\artisan(59): Symfony\Component\Console\Application->run()
+#4 {main} [] []
+[2014-07-27 04:35:13] production.ERROR: exception 'Illuminate\Database\QueryException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'siiupp0.users' doesn't exist (SQL: alter table `users` add `concepto` varchar(255) not null)' in K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Connection.php:555
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Connection.php(338): Illuminate\Database\Connection->run('alter table `us...', Array, Object(Closure))
+#1 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Schema\Blueprint.php(63): Illuminate\Database\Connection->statement('alter table `us...')
+#2 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Schema\Builder.php(169): Illuminate\Database\Schema\Blueprint->build(Object(Illuminate\Database\MySqlConnection), Object(Illuminate\Database\Schema\Grammars\MySqlGrammar))
+#3 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Schema\Builder.php(94): Illuminate\Database\Schema\Builder->build(Object(Illuminate\Database\Schema\Blueprint))
+#4 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(3233): Illuminate\Database\Schema\Builder->table('users', Object(Closure))
+#5 K:\Lastest Projects\upa_pagos\app\database\migrations\2014_07_27_043315_app_conceptos_nuevos_campos.php(18): Illuminate\Support\Facades\Facade::__callStatic('table', Array)
+#6 K:\Lastest Projects\upa_pagos\app\database\migrations\2014_07_27_043315_app_conceptos_nuevos_campos.php(18): Illuminate\Support\Facades\Schema::table('users', Object(Closure))
+#7 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migrator.php(133): AppConceptosNuevosCampos->up()
+#8 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migrator.php(109): Illuminate\Database\Migrations\Migrator->runUp('2014_07_27_0433...', 4, false)
+#9 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migrator.php(80): Illuminate\Database\Migrations\Migrator->runMigrationList(Array, false)
+#10 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations\MigrateCommand.php(70): Illuminate\Database\Migrations\Migrator->run('K:\\Lastest Proj...', false)
+#11 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Console\Command.php(112): Illuminate\Database\Console\Migrations\MigrateCommand->fire()
+#12 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Command\Command.php(252): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Console\Command.php(100): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#14 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(887): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#15 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(193): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Database\Console\Migrations\MigrateCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#16 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(124): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#17 K:\Lastest Projects\upa_pagos\artisan(59): Symfony\Component\Console\Application->run()
+#18 {main} [] []
+[2014-07-27 04:39:29] production.ERROR: exception 'InvalidArgumentException' with message 'Command "generate" is not defined.
+
+Did you mean one of these?
+    generate:publish-templates
+    generate:controller
+    generate:migration
+    generate:scaffold
+    generate:resource
+    generate:model
+    generate:pivot
+    generate:seed
+    generate:view
+    key:generate' in K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php:564
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(190): Symfony\Component\Console\Application->find('generate')
+#1 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(124): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 K:\Lastest Projects\upa_pagos\artisan(59): Symfony\Component\Console\Application->run()
+#3 {main} [] []
+[2014-07-27 04:53:18] production.ERROR: exception 'InvalidArgumentException' with message 'Command "generate" is not defined.
+
+Did you mean one of these?
+    generate:publish-templates
+    generate:controller
+    generate:migration
+    generate:scaffold
+    generate:resource
+    generate:model
+    generate:pivot
+    generate:seed
+    generate:view
+    key:generate' in K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php:564
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(190): Symfony\Component\Console\Application->find('generate')
+#1 K:\Lastest Projects\upa_pagos\vendor\symfony\console\Symfony\Component\Console\Application.php(124): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 K:\Lastest Projects\upa_pagos\artisan(59): Symfony\Component\Console\Application->run()
+#3 {main} [] []
+[2014-07-27 05:10:49] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'else' (T_ELSE)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:54
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 05:10:51] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'else' (T_ELSE)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:54
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 05:10:57] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'else' (T_ELSE)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:54
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 05:11:00] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'else' (T_ELSE)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:54
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 05:25:31] production.ERROR: exception 'BadMethodCallException' with message 'Call to undefined method Illuminate\Database\Query\Builder::firstOrCreate()' in K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:2118
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->__call('firstOrCreate', Array)
+#1 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->firstOrCreate(Array)
+#2 [internal function]: UsuariosController->show('UP100706')
+#3 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#4 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5628): Illuminate\Routing\Controller->callAction('show', Array)
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5616): Illuminate\Routing\ControllerDispatcher->call(Object(UsuariosController), Object(Illuminate\Routing\Route), 'show')
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4815): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'usuariosControl...', 'show')
+#7 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('UP100706')
+#8 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5174): call_user_func_array(Object(Closure), Array)
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4840): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#13 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#14 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#15 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#16 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#17 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#18 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#19 K:\Lastest Projects\upa_pagos\server.php(19): require_once('K:\\Lastest Proj...')
+#20 {main} [] []
+[2014-07-27 05:25:33] production.ERROR: exception 'BadMethodCallException' with message 'Call to undefined method Illuminate\Database\Query\Builder::firstOrCreate()' in K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:2118
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->__call('firstOrCreate', Array)
+#1 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->firstOrCreate(Array)
+#2 [internal function]: UsuariosController->show('UP100706')
+#3 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#4 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5628): Illuminate\Routing\Controller->callAction('show', Array)
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5616): Illuminate\Routing\ControllerDispatcher->call(Object(UsuariosController), Object(Illuminate\Routing\Route), 'show')
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4815): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'usuariosControl...', 'show')
+#7 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('UP100706')
+#8 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5174): call_user_func_array(Object(Closure), Array)
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4840): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#13 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#14 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#15 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#16 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#17 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#18 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#19 K:\Lastest Projects\upa_pagos\server.php(19): require_once('K:\\Lastest Proj...')
+#20 {main} [] []
+[2014-07-27 05:25:45] production.ERROR: exception 'BadMethodCallException' with message 'Call to undefined method Illuminate\Database\Query\Builder::firstOrCreate()' in K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:2118
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->__call('firstOrCreate', Array)
+#1 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->firstOrCreate(Array)
+#2 [internal function]: UsuariosController->show('UP100706')
+#3 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#4 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5628): Illuminate\Routing\Controller->callAction('show', Array)
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5616): Illuminate\Routing\ControllerDispatcher->call(Object(UsuariosController), Object(Illuminate\Routing\Route), 'show')
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4815): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'usuariosControl...', 'show')
+#7 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('UP100706')
+#8 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5174): call_user_func_array(Object(Closure), Array)
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4840): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#13 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#14 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#15 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#16 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#17 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#18 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#19 K:\Lastest Projects\upa_pagos\server.php(19): require_once('K:\\Lastest Proj...')
+#20 {main} [] []
+[2014-07-27 05:27:43] production.ERROR: exception 'BadMethodCallException' with message 'Call to undefined method Illuminate\Database\Query\Builder::firstOrNew()' in K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:2118
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->__call('firstOrNew', Array)
+#1 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->firstOrNew(Array)
+#2 [internal function]: UsuariosController->show('UP100706')
+#3 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#4 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5628): Illuminate\Routing\Controller->callAction('show', Array)
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5616): Illuminate\Routing\ControllerDispatcher->call(Object(UsuariosController), Object(Illuminate\Routing\Route), 'show')
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4815): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'usuariosControl...', 'show')
+#7 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('UP100706')
+#8 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5174): call_user_func_array(Object(Closure), Array)
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4840): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#13 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#14 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#15 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#16 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#17 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#18 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#19 K:\Lastest Projects\upa_pagos\server.php(19): require_once('K:\\Lastest Proj...')
+#20 {main} [] []
+[2014-07-27 05:27:45] production.ERROR: exception 'BadMethodCallException' with message 'Call to undefined method Illuminate\Database\Query\Builder::firstOrNew()' in K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:2118
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->__call('firstOrNew', Array)
+#1 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Query\Builder->firstOrNew(Array)
+#2 [internal function]: UsuariosController->show('UP100706')
+#3 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#4 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5628): Illuminate\Routing\Controller->callAction('show', Array)
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5616): Illuminate\Routing\ControllerDispatcher->call(Object(UsuariosController), Object(Illuminate\Routing\Route), 'show')
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4815): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'usuariosControl...', 'show')
+#7 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('UP100706')
+#8 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5174): call_user_func_array(Object(Closure), Array)
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4840): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#13 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#14 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#15 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#16 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#17 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#18 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#19 K:\Lastest Projects\upa_pagos\server.php(19): require_once('K:\\Lastest Proj...')
+#20 {main} [] []
+[2014-07-27 05:27:54] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:53
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 05:27:56] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:53
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 05:31:12] production.ERROR: exception 'Illuminate\Database\Eloquent\MassAssignmentException' with message 'nocuenta' in K:\Lastest Projects\upa_pagos\bootstrap\compiled.php:6236
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(6166): Illuminate\Database\Eloquent\Model->fill(Array)
+#1 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(6299): Illuminate\Database\Eloquent\Model->__construct(Array)
+#2 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Eloquent\Model::firstOrNew(Array)
+#3 [internal function]: UsuariosController->show('UP100706')
+#4 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5628): Illuminate\Routing\Controller->callAction('show', Array)
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5616): Illuminate\Routing\ControllerDispatcher->call(Object(UsuariosController), Object(Illuminate\Routing\Route), 'show')
+#7 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4815): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'usuariosControl...', 'show')
+#8 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('UP100706')
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5174): call_user_func_array(Object(Closure), Array)
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4840): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#13 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#14 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#15 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#16 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#17 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#18 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#19 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#20 K:\Lastest Projects\upa_pagos\server.php(19): require_once('K:\\Lastest Proj...')
+#21 {main} [] []
+[2014-07-27 05:32:27] production.ERROR: exception 'Illuminate\Database\Eloquent\MassAssignmentException' with message 'nocuenta' in K:\Lastest Projects\upa_pagos\bootstrap\compiled.php:6236
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(6166): Illuminate\Database\Eloquent\Model->fill(Array)
+#1 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(6299): Illuminate\Database\Eloquent\Model->__construct(Array)
+#2 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Eloquent\Model::firstOrNew(Array)
+#3 [internal function]: UsuariosController->show('UP100706')
+#4 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5628): Illuminate\Routing\Controller->callAction('show', Array)
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5616): Illuminate\Routing\ControllerDispatcher->call(Object(UsuariosController), Object(Illuminate\Routing\Route), 'show')
+#7 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4815): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'usuariosControl...', 'show')
+#8 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('UP100706')
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5174): call_user_func_array(Object(Closure), Array)
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4840): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#13 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#14 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#15 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#16 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#17 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#18 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#19 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#20 K:\Lastest Projects\upa_pagos\server.php(19): require_once('K:\\Lastest Proj...')
+#21 {main} [] []
+[2014-07-27 05:37:53] production.ERROR: exception 'Illuminate\Database\Eloquent\MassAssignmentException' with message 'nocuenta' in K:\Lastest Projects\upa_pagos\bootstrap\compiled.php:6236
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(6166): Illuminate\Database\Eloquent\Model->fill(Array)
+#1 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(6283): Illuminate\Database\Eloquent\Model->__construct(Array)
+#2 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(6292): Illuminate\Database\Eloquent\Model::create(Array)
+#3 K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php(53): Illuminate\Database\Eloquent\Model::firstOrCreate(Array)
+#4 [internal function]: UsuariosController->show('UP100682')
+#5 K:\Lastest Projects\upa_pagos\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5628): Illuminate\Routing\Controller->callAction('show', Array)
+#7 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5616): Illuminate\Routing\ControllerDispatcher->call(Object(UsuariosController), Object(Illuminate\Routing\Route), 'show')
+#8 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4815): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'usuariosControl...', 'show')
+#9 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('UP100682')
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5174): call_user_func_array(Object(Closure), Array)
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4840): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#13 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#14 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#15 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#16 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#17 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#18 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#19 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#20 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#21 K:\Lastest Projects\upa_pagos\server.php(19): require_once('K:\\Lastest Proj...')
+#22 {main} [] []
+[2014-07-27 05:43:20] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected '->' (T_OBJECT_OPERATOR)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:53
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 05:43:22] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected '->' (T_OBJECT_OPERATOR)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:53
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 05:43:29] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected '->' (T_OBJECT_OPERATOR)' in K:\Lastest Projects\upa_pagos\app\controllers\usuariosController.php:53
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-07-27 15:45:04] production.ERROR: exception 'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException' in K:\Lastest Projects\upa_pagos\bootstrap\compiled.php:5556
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5551): Illuminate\Routing\RouteCollection->methodNotAllowed(Array)
+#1 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5529): Illuminate\Routing\RouteCollection->getOtherMethodsRoute(Object(Illuminate\Http\Request), Array)
+#2 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4848): Illuminate\Routing\RouteCollection->match(Object(Illuminate\Http\Request))
+#3 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4836): Illuminate\Routing\Router->findRoute(Object(Illuminate\Http\Request))
+#4 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#7 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#8 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#13 {main} [] []
+[2014-07-27 15:45:28] production.ERROR: exception 'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException' in K:\Lastest Projects\upa_pagos\bootstrap\compiled.php:5556
+Stack trace:
+#0 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5551): Illuminate\Routing\RouteCollection->methodNotAllowed(Array)
+#1 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(5529): Illuminate\Routing\RouteCollection->getOtherMethodsRoute(Object(Illuminate\Http\Request), Array)
+#2 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4848): Illuminate\Routing\RouteCollection->match(Object(Illuminate\Http\Request))
+#3 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4836): Illuminate\Routing\Router->findRoute(Object(Illuminate\Http\Request))
+#4 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(4828): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#5 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(721): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#6 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(702): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#7 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(7533): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#8 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8136): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#9 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(8083): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#10 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(10719): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#11 K:\Lastest Projects\upa_pagos\bootstrap\compiled.php(663): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#12 K:\Lastest Projects\upa_pagos\public\index.php(49): Illuminate\Foundation\Application->run()
+#13 {main} [] []
