@@ -56,16 +56,10 @@ class UsuariosController extends \BaseController {
 				'persona.email',
 				'persona.password')
 		    ->first();
-		    $token = hash('sha256',uniqid(),false);
+		    //$token = hash('sha256',uniqid(),false);
 		    if ($user){
-		    	$token_exist=Token::where('nocuenta', '=', $nocuenta)->first();
-		    	if ($token_exist){
-		    		Token::where('nocuenta', $nocuenta)->update(array('api_token' => $token));
-		    	}else{
-		    		Token::insert(array('nocuenta'=>$nocuenta, 'api_token'=>$token));
-		    	}
-		    	$user->token=$token;
-		    	return json_encode($user);
+		    	Session::put('user',$user);
+		    	return json_encode(Session::all());
 		    }
 		    else{
 		    	return json_encode(array("error"=>"User or password Incorrect"));

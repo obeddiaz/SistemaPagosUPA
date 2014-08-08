@@ -6,7 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddIndexConceptos' => $baseDir . '/app/database/migrations/2014_08_05_050003_add_index_conceptos.php',
+    'AddMontoSubconcepto' => $baseDir . '/app/database/migrations/2014_08_08_043048_add_monto_subconcepto.php',
     'AppConceptosNuevosCampos' => $baseDir . '/app/database/migrations/2014_07_27_043315_app_conceptos_nuevos_campos.php',
+    'AppPupulateUsersPermissions' => $baseDir . '/app/database/migrations/2014_07_28_041904_app_pupulate_users_permissions.php',
     'AppTableUpUserPermissions' => $baseDir . '/app/database/migrations/2014_07_27_155734_app_table_up_user_permissions.php',
     'AppTokenTable' => $baseDir . '/app/database/migrations/2014_07_27_050047_app_token_table.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
@@ -35,6 +38,7 @@ return array(
     'ConceptosController' => $baseDir . '/app/controllers/ConceptosController.php',
     'ConceptosTableSeeder' => $baseDir . '/app/database/seeds/ConceptosTableSeeder.php',
     'CreateConceptosTable' => $baseDir . '/app/database/migrations/2014_07_27_042323_create_conceptos_table.php',
+    'CreateSubConceptosTable' => $baseDir . '/app/database/migrations/2014_08_08_034843_create_sub_conceptos_table.php',
     'Crypt_AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
     'Crypt_Base' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',
     'Crypt_Blowfish' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Blowfish.php',
@@ -688,6 +692,8 @@ return array(
     'Patchwork\\Utf8' => $vendorDir . '/patchwork/utf8/class/Patchwork/Utf8.php',
     'Patchwork\\Utf8\\Bootup' => $vendorDir . '/patchwork/utf8/class/Patchwork/Utf8/Bootup.php',
     'Patchwork\\Utf8\\WinFsStreamWrapper' => $vendorDir . '/patchwork/utf8/class/Patchwork/Utf8/WinFsStreamWrapper.php',
+    'Persona' => $baseDir . '/app/models/Persona.php',
+    'PersonasController' => $baseDir . '/app/controllers/PersonasController.php',
     'Predis\\Autoloader' => $vendorDir . '/predis/predis/lib/Predis/Autoloader.php',
     'Predis\\BasicClientInterface' => $vendorDir . '/predis/predis/lib/Predis/BasicClientInterface.php',
     'Predis\\Client' => $vendorDir . '/predis/predis/lib/Predis/Client.php',
@@ -962,6 +968,8 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Stack\\Builder' => $vendorDir . '/stack/builder/src/Stack/Builder.php',
     'Stack\\StackedHttpKernel' => $vendorDir . '/stack/builder/src/Stack/StackedHttpKernel.php',
+    'SubConcepto' => $baseDir . '/app/models/SubConcepto.php',
+    'SubConceptosController' => $baseDir . '/app/controllers/SubConceptosController.php',
     'Symfony\\Component\\BrowserKit\\Client' => $vendorDir . '/symfony/browser-kit/Symfony/Component/BrowserKit/Client.php',
     'Symfony\\Component\\BrowserKit\\Cookie' => $vendorDir . '/symfony/browser-kit/Symfony/Component/BrowserKit/Cookie.php',
     'Symfony\\Component\\BrowserKit\\CookieJar' => $vendorDir . '/symfony/browser-kit/Symfony/Component/BrowserKit/CookieJar.php',

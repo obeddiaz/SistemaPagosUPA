@@ -32,7 +32,14 @@ class ConceptosController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$concepto = new Concepto;
+		$concepto->concepto=Input::get('concepto');
+		if (!$concepto->isValid()){
+			return json_encode(array("error"=>true,"message"=>"Nombre de concepto ya existente"));
+		}else{
+			$concepto->save();
+			return json_encode($concepto);
+		}
 	}
 
 	/**
@@ -42,9 +49,13 @@ class ConceptosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($token,$id)
 	{
-		//
+		$show_subconceptos = new SubConcepto;
+		$show_subconceptos->where('concepto_id','=',$id)->get();
+		//var_dump($show_subconceptos->where('concepto_id','=',$id)->get());
+		//echo "hola";
+		return json_encode($show_subconceptos->select('sub_concepto','importe')->where('concepto_id','=',$id)->get());
 	}
 
 	/**
@@ -54,9 +65,9 @@ class ConceptosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($token,$id)
 	{
-		//
+		return $id;
 	}
 
 	/**
@@ -66,7 +77,7 @@ class ConceptosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($token,$id)
 	{
 		//
 	}
@@ -78,9 +89,17 @@ class ConceptosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($token,$id)
 	{
-		//
+		$concepto = new Concepto;
+		if (!is_null($concepto->find($id))) {
+			$concepto->destroy($id);
+			return json_encode(array("error"=>false,"message"=>"El concepto fue eliminado correctamente"));
+		}
+		else{
+			return json_encode(array("error"=>true,"message"=>"El concepto no puede ser encontrado, favor de verificarlo"));
+		}
+		//Route::getCurrentRoute()->getParameter('document')
 	}
 
 }

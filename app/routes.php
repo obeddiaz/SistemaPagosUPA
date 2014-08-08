@@ -10,40 +10,37 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
 Route::get('/', function()
 {
-	return View::make('hello');
+	return 'user no logged';
+});
+Route::group(array('prefix' => '/api/{token}','before' => 'auth'), function()
+{
+	//resource conceptos 
+	Route::group(array('prefix' => '/conceptos'), function(){
+		Route::get('/', array('uses' => 'ConceptosController@index'));
+		Route::get('/create', array('uses' => 'conceptossController@create'));
+		Route::post('/', array('uses' => 'ConceptosController@store'));
+		Route::get('/{id}', array('uses' => 'ConceptosController@show'));
+		Route::get('/{id}/edit', array('uses' => 'ConceptosController@edit'));
+		Route::put('/{id}', 'ConceptosController@update');
+		Route::delete('/{id}', 'ConceptosController@destroy');
+		Route::post('/create', array('uses' => 'conceptosController@post_create'));
+	});
+	//resource subconcepto 
+	Route::group(array('prefix' => '/sub_conceptos'), function(){
+		Route::get('/', array('uses' => 'SubConceptosController@index'));
+		Route::post('/create/{id_concepto}', array('uses' => 'SubConceptosController@create'));
+	});
+	//resource Personas
+	Route::group(array('prefix' => '/personas'), function(){
+		Route::get('/', array('as' => 'personas', 'uses' => 'PersonasController@index'));
+		Route::get('{id}', array('as' => 'persona_by_id', 'uses' => 'PersonasController@show'));
+		Route::get('/admin', array('as' => 'personas_admin_all', 'uses' => 'PersonasController@show_admin'));
+		Route::get('/admin/{id}', array('as' => 'personas_admin', 'uses' => 'PersonasController@show_admin_by_id'));
+		Route::get('/alumno', array('as' => 'personas_alumno_all', 'uses' => 'PersonasController@show_alumno'));
+		Route::get('/alumno/{id}', array('as' => 'personas_alumno', 'uses' => 'PersonasController@show_alumno_by_id'));
+	});
 });
 
-
-// conceptos resource
-Route::get('conceptos', array('as' => 'conceptos', 'uses' => 'conceptosController@index'));
-Route::get('conceptos/create', array('as' => 'concept', 'uses' => 'conceptosController@create'));
-Route::post('conceptos', array('as' => 'new_concept', 'uses' => 'conceptosController@store'));
-Route::get('conceptos/{id}', array('as' => 'concept', 'uses' => 'conceptosController@show'));
-Route::get('conceptos/{id}/edit', array('as' => 'concept', 'uses' => 'conceptosController@edit'));
-Route::put('conceptos/{id}', 'conceptosController@update');
-Route::delete('conceptos/{id}', 'conceptosController@destroy');
-Route::post('conceptos/create', array('as' => 'new_concept', 'uses' => 'conceptosController@post_create'));
-
-
-//usuarios resource
-//Route::get('user', array('as' => 'conceptos', 'uses' => 'conceptosController@index'));
-//Route::get('user/create', array('as' => 'concept', 'uses' => 'conceptosController@create'));
-//Route::post('user', array('as' => 'new_concept', 'uses' => 'conceptosController@store'));
 Route::get('user/{nocuenta}/{password}', array('as' => 'user', 'uses' => 'usuariosController@show'));
-//Route::get('conceptos/{id}/edit', array('as' => 'concept', 'uses' => 'conceptosController@edit'));
-//Route::put('conceptos/{id}', 'conceptosController@update');
-//Route::delete('conceptos/{id}', 'conceptosController@destroy');
-//Route::post('conceptos/create', array('as' => 'new_concept', 'uses' => 'conceptosController@post_create'));
-
-Route::get('test', function(){
-   //$user = Usuarios::where('nocuenta', 'UP100682')->first();
-   //return $user->idcurso;
-	$user=Usuarios::where('nocuenta', 'UP100682')
-	->join('persona', 'alumno.idpersonas', '=', 'persona.idpersonas')
-    ->select('persona.nombre')
-    ->first();
-    return $user;
-});

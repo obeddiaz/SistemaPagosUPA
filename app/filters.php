@@ -2,18 +2,22 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application & Route Filters
+| Application & Route filters laravelFilters
 |--------------------------------------------------------------------------
 |
 | Below you will find the "before" and "after" events for the application
 | which may be used to do any work before or after a request into your
 | application. Here you may also register your custom route filters.
 |
+	
+
 */
 
 App::before(function($request)
 {
-	//
+#	if(!Route::get('user/{nocuenta}/{password}', array('as' => 'user', 'uses' => 'usuariosController@show'))
+#	{
+#	}
 });
 
 
@@ -33,21 +37,17 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
+Route::filter('auth', function($route=null)
 {
-	if (Auth::guest())
+	if (!Session::has('user'))
 	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
+		return json_encode(array('error' =>true,'message'=>'The user is not logged in'));  	
+	} else {
+		if (Session::get('_token')!=$route->getParameter('token')){
+			return json_encode(array('error' =>true,'message'=>'Wrong Token'));
 		}
 	}
 });
-
 
 Route::filter('auth.basic', function()
 {
@@ -70,6 +70,7 @@ Route::filter('guest', function()
 	if (Auth::check()) return Redirect::to('/');
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | CSRF Protection Filter
@@ -80,7 +81,6 @@ Route::filter('guest', function()
 | session does not match the one given in this request, we'll bail.
 |
 */
-
 Route::filter('csrf', function()
 {
 	if (Session::token() != Input::get('_token'))
