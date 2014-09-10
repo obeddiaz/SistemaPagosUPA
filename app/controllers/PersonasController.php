@@ -9,7 +9,24 @@ class PersonasController extends \BaseController {
 	 */
 	public function index()
 	{
-		'This is the controller for manage Personas of the API of the Universidad Politecnica de Aguascalientes';
+		$persona_info=Persona::Select(
+							'persona.idpersonas',
+							'persona.apellidopat',
+							'persona.apellidomat',
+							'persona.nombre',
+							'persona.fechanaci',
+							'persona.curp',
+							'persona.sexo',
+							'persona.alumno_activo',
+							'persona.admin_activo',
+							'persona.profesor_activo')
+							->get();
+		if($persona_info)
+		{
+			echo json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info));
+		} else {
+			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+		}
 	}
 
 
@@ -63,9 +80,10 @@ class PersonasController extends \BaseController {
 			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
 		}
 	}
-	public function show_admin()
+	public function show_admin($token,$id=null)
 	{
-		$persona_info=Persona::Select(
+		$persona=new Persona;
+		$persona_info=$persona->Select(
 									'persona.idpersonas',
 									'persona.apellidopat',
 									'persona.apellidomat',
@@ -75,98 +93,116 @@ class PersonasController extends \BaseController {
 									'persona.sexo',
 									'admin.idadmin',
 									'admin.grado_siglas',
-									'admin.fecha_inicio'
-									)
+									'admin.fecha_inicio')
 									->join('admin', 'persona.idpersonas', '=', 'admin.idpersonas')
-									->where('persona.admin_activo','1')
-									->get();	
-		if($persona_info)
+									->where('persona.admin_activo','1');	
+		if(!is_null($id))
 		{
-			echo json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info));
+				$persona_info=$persona_info->where('persona.idpersonas', $id);
+		} 
+
+		if($persona_info->get())
+		{
+			return json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info->get()));
 		} else {
-			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+			return json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+		}
+
+	}
+
+	public function show_alumno($token,$id=null)
+	{
+		$persona=new Persona;
+		$persona_info=$persona->Select(
+					'persona.idpersonas',
+					'persona.apellidopat',
+					'persona.apellidomat',
+					'persona.nombre',
+					'persona.fechanaci',
+					'persona.curp',
+					'persona.sexo',
+					'alumno.nocuenta',
+					'alumno.idcurso',
+					'alumno.idplan_estudios'
+					)
+					->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
+					->where('persona.alumno_activo','1');
+		if(!is_null($id))
+		{
+				$persona_info=$persona_info->where('persona.idpersonas', $id);
+		}  
+
+		if($persona_info->get())
+		{
+			return json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info->get()));
+		} else {
+			return json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
 		}
 	}
 
-	public function show_admin_by_id($token,$id=null)
+	public function show_alumno_by_nocuenta($token,$nocuenta)
 	{
-			$persona_info=Persona::Select(
-									'persona.idpersonas',
-									'persona.apellidopat',
-									'persona.apellidomat',
-									'persona.nombre',
-									'persona.fechanaci',
-									'persona.curp',
-									'persona.sexo',
-									'admin.idadmin',
-									'admin.grado_siglas',
-									'admin.fecha_inicio'
-									)
-									->join('admin', 'persona.idpersonas', '=', 'admin.idpersonas')
-									->where('persona.idpersonas', $id)
-									->where('persona.admin_activo','1')
-									->first();
-		if($persona_info)
+		$persona=new Persona;
+		$persona_info=$persona->Select(
+					'concat(nombre," ",apellidopat," ",apellidomat) as nombre_completo',
+					'persona.idpersonas',
+					'persona.apellidopat',
+					'persona.apellidomat',
+					'persona.nombre',
+					'persona.fechanaci',
+					'persona.curp',
+					'persona.sexo',
+					'alumno.nocuenta',
+					'alumno.idcurso',
+					'alumno.idplan_estudios'
+					)
+					->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
+					->where('alumno.nocuenta',$nocuenta);
+
+		
+		  
+
+		if($persona_info->get())
 		{
-			echo json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info));
+			return json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info->get()));
 		} else {
-			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+			return json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
 		}
 	}
 
-	public function show_alumno()
-	{
-		$persona_info=Persona::Select(
-									'persona.idpersonas',
-									'persona.apellidopat',
-									'persona.apellidomat',
-									'persona.nombre',
-									'persona.fechanaci',
-									'persona.curp',
-									'persona.sexo',
-									'alumno.nocuenta',
-									'alumno.idcurso',
-									'alumno.idplan_estudios'
-									)
-									->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
-									->where('persona.alumno_activo','1')
-									->get();	
-		if($persona_info)
-		{
-			echo json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info));
-		} else {
-			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
-		}
-	}
 
-	public function show_alumno_by_id($token,$id=null)
-	{
-		$persona_info=Persona::Select(
-									'persona.idpersonas',
-									'persona.apellidopat',
-									'persona.apellidomat',
-									'persona.nombre',
-									'persona.fechanaci',
-									'persona.curp',
-									'persona.sexo',
-									'alumno.nocuenta',
-									'alumno.idcurso',
-									'alumno.idplan_estudios'
-									)
-									->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
-									->where('persona.idpersonas', $id)
-									->where('persona.alumno_activo','1')
-									->get();	
-		if($persona_info)
-		{
-			echo json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info));
-		} else {
-			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
-		}
-	}
-	public function show_maestros($id=null)
-	{
 
+	public function show_profesor($token,$id=null)
+	{
+			$persona=new Persona;
+			$persona_info=$persona->Select(
+						'persona.idpersonas',
+						'persona.apellidopat',
+						'persona.apellidomat',
+						'persona.nombre',
+						'persona.fechanaci',
+						'persona.curp',
+						'persona.sexo',
+						'profesor.idprofesor',
+						'profesor.idupa',
+						'profesor.cargo',
+						'profesor.grado',
+						'profesor.grado_siglas',
+						'profesor.tipo_cont'
+						)
+					->join('profesor', 'persona.idpersonas', '=', 'profesor.idpersonas')
+					->where('persona.profesor_activo','1');
+		if(!is_null($id))
+		{
+				$persona_info=$persona_info->where('persona.idpersonas', $id);
+		}  
+
+		if($persona_info->get())
+		{
+			return json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info->get()));
+		} else {
+			return json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+		}
 	}
 
 
