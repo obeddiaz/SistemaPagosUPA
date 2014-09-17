@@ -22,6 +22,7 @@ class GradosController extends \BaseController {
 	 */
 	public function create($toke,$params)
 	{
+		$params=json_decode($params);
 		try {
 			$info=array(
 				'nocuenta'=>$params->nocuenta,
@@ -113,6 +114,7 @@ class GradosController extends \BaseController {
 	 */
 	public function update($token,$params)
 	{
+		$params=json_decode($params);
 		try {
 			$nocuenta=$params->nocuenta;
 			unset($params->nocuenta);
@@ -137,6 +139,7 @@ class GradosController extends \BaseController {
 	 */
 	public function destroy($token,$params)
 	{
+		$params=json_decode($params);
 		try {
 			DB::table('cuatrimestre_cursado')
 				->where('nocuenta', '=', $params->nocuenta)

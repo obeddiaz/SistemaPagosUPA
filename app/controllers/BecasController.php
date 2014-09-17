@@ -29,6 +29,7 @@ class BecasController extends \BaseController {
 	 */
 	public function create($toke,$params)
 	{
+		$params=json_decode($params);
 		$info=array(
 			'beca'=>$params->beca,
 			'vinculacion'=>$params->vinculacion
@@ -59,23 +60,31 @@ class BecasController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($token,$id)
+	public function show($token,$params)
 	{
-		$becas_info=Becas::Select(
-		'*'
-		)
-		->where('beca_tipo.id', $id)
-		->first();
-		if($becas_info)
-		{
-			echo json_encode(array('error' => false,'messsage'=>'','response'=>$becas_info));
-		} else {
+		$params=json_decode($params);
+		$becas= DB::table('becas_autorizadas');
+		$becas_info=$becas
+		->join('beca_tipo','beca_tipo.idbeca_tipo','=','becas_autorizadas.idbeca_tipo')
+		->join('alumno','alumno.nocuenta','=','becas_autorizadas.nocuenta')
+		->join('estatus_alumno','estatus_alumno.estatus','=','alumno.estatus')
+		->join('curso','curso.idcurso','=','alumno.idcurso')
+		->join('niveles_academicos','niveles_academicos.idnivel','=','curso.nivel')
+		->where('estatus_alumno.estatus', $params->estatus_alumno);
+		if($params->niveles_academicos!='TODOS')
+			$becas->where('niveles_academicos.idnivel', $params->niveles_academicos);
+		$becas->Select('becas_autorizadas.*','alumno.nocuenta','beca_tipo.beca','estatus_alumno.estatus','niveles_academicos.nombre');
+		
+		try {
+			echo json_encode(array('error' => false,'messsage'=>'','response'=>$becas_info->get()));
+		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
 		}
 	}
 
 	public function show_by_nocuenta($token,$params)
 	{
+		$params=json_decode($params);
 		$becas_info=DB::table('beca_porcentaje')
 				->join('becas_autorizadas', 'beca_porcentaje.idbeca_tipo', '=','becas_autorizadas.idbeca_tipo')
 				->where('becas_autorizadas.nocuenta', $params->nocuenta)
@@ -111,6 +120,7 @@ class BecasController extends \BaseController {
 	 */
 	public function update($token,$params)
 	{
+		$params=json_decode($params);
 		try {
 			$id=$params->id;
 			unset($params->id);
@@ -128,6 +138,7 @@ class BecasController extends \BaseController {
 
 	public function update_autorizada($token,$params)
 	{
+		$params=json_decode($params);
 		try {
 			$nocuenta=$params->nocuenta;
 			unset($params->nocuenta);

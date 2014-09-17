@@ -142,9 +142,10 @@ class PersonasController extends \BaseController {
 
 	public function show_alumno_by_nocuenta($token,$nocuenta)
 	{
-		$persona=new Persona;
-		$persona_info=$persona->Select(
-					'concat(nombre," ",apellidopat," ",apellidomat) as nombre_completo',
+		$persona=DB::table('persona');
+		$persona_info=$persona->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
+					->where('alumno.nocuenta',$nocuenta)
+					->Select(
 					'persona.idpersonas',
 					'persona.apellidopat',
 					'persona.apellidomat',
@@ -154,10 +155,10 @@ class PersonasController extends \BaseController {
 					'persona.sexo',
 					'alumno.nocuenta',
 					'alumno.idcurso',
-					'alumno.idplan_estudios'
-					)
-					->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
-					->where('alumno.nocuenta',$nocuenta);
+					'alumno.idplan_estudios',
+					DB::raw('concat(nombre," ",apellidopat," ",apellidomat) as nombre_completo')
+					);
+
 
 		
 		  
@@ -171,6 +172,35 @@ class PersonasController extends \BaseController {
 	}
 
 
+	public function show_alumno_by_nombre($token,$params)
+	{
+
+		$params=json_decode($params);
+		$persona=DB::table('persona');
+		$persona_info=$persona->Select(
+					'alumno.nocuenta as matricula',
+					'alumno.estatus as situacion',
+					db::raw('concat(persona.nombre," ",persona.apellidopat," ",persona.apellidomat) as nombre')
+					)
+					->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
+					->where('persona.nombre','LIKE','%'.$params->nombre.'%');
+		if (isset($params->apellidopat)) {
+			$persona_info=$persona_info->where('persona.apellidopat',$params->apellidopat);
+		}
+					
+		if(isset($params->apellidomat))
+		{
+			$persona_info=$persona_info->where('persona.apellidomat',$params->apellidomat);
+		}
+					
+
+		if($persona_info->get())
+		{
+			return json_encode(array('error' => false,'messsage'=>'','response'=>$persona_info->get()));
+		} else {
+			return json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+		}
+	}
 
 	public function show_profesor($token,$id=null)
 	{

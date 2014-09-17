@@ -29,6 +29,7 @@ class NivelesController extends \BaseController {
 	 */
 	public function create($toke,$params)
 	{
+		$params=json_decode($params);
 		$info= array('nombre' => $params->nombre,
 			'descripcion' => $params->descripcion,
 			'estatus' => $params->estatus);
@@ -110,6 +111,7 @@ class NivelesController extends \BaseController {
 	 */
 	public function update($token,$params)
 	{
+		$params=json_decode($params);
 		try {
 			$id=$params->id;
 			unset($params->id);

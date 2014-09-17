@@ -26,6 +26,7 @@ class CobrosController extends \BaseController {
 	 */
 	public function create($toke,$params)
 	{
+		$params=json_decode($params);
 		$info_new=array(
 			'descripcion'=>$params->descripcion ,
 			'estatus'=>$params->estatus
@@ -36,10 +37,26 @@ class CobrosController extends \BaseController {
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));
 		}
-			
+	}
 
-			
-
+	public function create_alumno($toke,params)
+	{
+		$params=json_decode($params);
+		$info_new=array(
+			'subconceptos_id'=>$params->subconceptos_id,
+			'nocuenta'=>$params->nocuenta,
+			'ciclos_id'=>$params->ciclos_id,
+			'mes_ciclo_id'=>$params->mes_ciclo_id,
+			'id_beca_autorizada'=>$params->id_beca_autorizada,
+			'fecha_solicitud'=>$params->fecha_solicitud,
+			'fecha_limite'=>$params->fecha_limite
+		);
+		try {
+			$new_id=DB::table('alumnos_cobros')->insertGetId($info_new);
+			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'New alumnos_cobros created ID:'.$new_id));
+		} catch (Exception $e) {
+			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	
+		}
 	}
 
 
@@ -118,6 +135,7 @@ class CobrosController extends \BaseController {
 	 */
 	public function update($token,$params)
 	{
+		$params=json_decode($params);
 		try {
 			$id=$params->id;
 			unset($params->id);

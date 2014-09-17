@@ -29,6 +29,7 @@ class CiclosController extends \BaseController {
 	 */
 	public function create($toke,$params)
 	{
+		$params=json_decode($params);
 		$info=array(
 				'descripcion'=>$params->descripcion,
 				'abreviacion'=>$params->abreviacion
@@ -110,6 +111,7 @@ class CiclosController extends \BaseController {
 	 */
 	public function update($token,$params)
 	{
+		$params=json_decode($params);
 		try {
 			$id=$params->id;
 			unset($params->id;
