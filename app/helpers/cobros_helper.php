@@ -14,6 +14,15 @@
 				->where('beca_porcentaje.calificacion_final','>=' ,$data[$key_row]->promedio)
 				->Select('beca_porcentaje.porcentaje as porcentaje')
 				->get();
+
+				if (!$porcentaje_beca && !empty($porcentaje_beca)) {
+					$porcentaje_beca=$porcentaje_beca[0]->porcentaje;
+				} else {
+					$porcentaje_beca=0;
+				}
+
+				$response[$key_row]['beca']=$data[$key_row]->monto*intval($porcentaje_beca)/100;
+				$response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca)/100);
 				
 				$referencia=DB::table('referencia')
 					->Where('referencia.alumnos_cobros_id', $data[$key_row]->id)
@@ -35,8 +44,7 @@
 					$response[$key_row]['recargo']=0.0;	
 				}
 
-				$response[$key_row]['beca']=$data[$key_row]->monto*intval($porcentaje_beca[0]->porcentaje)/100;
-				$response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca[0]->porcentaje)/100);
+
 			}
 		}
 		return $response;
