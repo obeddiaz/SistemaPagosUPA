@@ -22,7 +22,6 @@
 					$porcentaje_beca="0";
 				}
 				$response[$key_row]['beca']=$data[$key_row]->monto*intval($porcentaje_beca)/100;
-				//$response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca)/100);
 				
 				$referencia=DB::table('referencia')
 					->Where('referencia.alumnos_cobros_id', $data[$key_row]->id)
@@ -43,6 +42,7 @@
 					} else {
 						$response[$key_row]['recargo']=0.0;	
 					}
+                                        $response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca)/100);
 				} else {
 					echo json_encode(array('error' => true,'messsage'=>'No reference','response'=>''));
 					die();
