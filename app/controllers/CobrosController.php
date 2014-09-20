@@ -39,11 +39,7 @@ class CobrosController extends \BaseController {
 		}
 	}
 
-<<<<<<< HEAD
-	public function create_alumno($toke,$params)
-=======
 	public function create_alumno($toke,params)
->>>>>>> 4b175ee7373ee7e73989df778345852f83acc5c0
 	{
 		$params=json_decode($params);
 		$info_new=array(
@@ -92,20 +88,17 @@ class CobrosController extends \BaseController {
 		}
 	}
 
-	public function show_estado_de_cuenta($token)
+	public function show_estado_de_cuenta($token,$params)
 	{
-		//$params=json_decode($params);
-		//var_dump(Input::get());
-		//$referencias=new Referencias();
-		//var_dump($referencias->generar('ISEI','UP100682', 'INS', '225', '31-25-2014'));
+		$params=json_decode($params);
 		$alumnos_cobros= DB::table('alumnos_cobros')
 				->join('alumno', 'alumnos_cobros.nocuenta', '=','alumno.nocuenta')
 				->join('cobros', 'alumnos_cobros.cobros_id', '=','cobros.id_cobro')
 				->join('mes_ciclo', 'alumnos_cobros.mes_ciclo_id', '=','mes_ciclo.id')
 				->join('curso', 'alumno.idcurso', '=','curso.idcurso')
 				->join('niveles_academicos', 'curso.nivel', '=','niveles_academicos.idnivel')
-				->where('alumnos_cobros.nocuenta', Input::get('nocuenta'))
-				->where('alumnos_cobros.ciclos_id', Input::get('ciclosid'))
+				->where('alumnos_cobros.nocuenta', $params->nocuenta)
+				->where('alumnos_cobros.ciclos_id', $params->ciclosid)
 				->Select("alumnos_cobros.id as id",
 					"alumnos_cobros.fecha_limite as fecha_limite",
 					"cobros.monto as monto",
@@ -140,14 +133,17 @@ class CobrosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token)
+	public function update($token,$params)
 	{
 		$params=json_decode($params);
 		try {
-			$id=Input::get('id');
+			$id=$params->id;
+			unset($params->id);
+
 			DB::table('cobroa')
 					->where('id', $id)
-	        		->update(Input::except('id'));
+	        		->update($params);	
+
 		    echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Update'));
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	

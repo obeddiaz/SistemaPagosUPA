@@ -27,16 +27,12 @@ class BecasController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($toke)
+	public function create($toke,$params)
 	{
-<<<<<<< HEAD
-		//$params=json_decode($params);
-=======
 		$params=json_decode($params);
->>>>>>> 4b175ee7373ee7e73989df778345852f83acc5c0
 		$info=array(
-			'beca'=>Input::get('beca'),
-			'vinculacion'=>Input::get('vinculacion')
+			'beca'=>$params->beca,
+			'vinculacion'=>$params->vinculacion
 			);
 		$id_beca=Becas::InsertGetId($info);
 		if ($id_beca) {
@@ -66,12 +62,7 @@ class BecasController extends \BaseController {
 	 */
 	public function show($token,$params)
 	{
-<<<<<<< HEAD
-		//Input::get('beca')
-		//$params=json_decode($params);
-=======
 		$params=json_decode($params);
->>>>>>> 4b175ee7373ee7e73989df778345852f83acc5c0
 		$becas= DB::table('becas_autorizadas');
 		$becas_info=$becas
 		->join('beca_tipo','beca_tipo.idbeca_tipo','=','becas_autorizadas.idbeca_tipo')
@@ -79,15 +70,9 @@ class BecasController extends \BaseController {
 		->join('estatus_alumno','estatus_alumno.estatus','=','alumno.estatus')
 		->join('curso','curso.idcurso','=','alumno.idcurso')
 		->join('niveles_academicos','niveles_academicos.idnivel','=','curso.nivel')
-<<<<<<< HEAD
-		->where('estatus_alumno.estatus', Input::get('estatus_alumno'));
-		if(Input::get('niveles_academicos')!='TODOS')
-			$becas->where('niveles_academicos.idnivel', Input::get('niveles_academicos'));
-=======
 		->where('estatus_alumno.estatus', $params->estatus_alumno);
 		if($params->niveles_academicos!='TODOS')
 			$becas->where('niveles_academicos.idnivel', $params->niveles_academicos);
->>>>>>> 4b175ee7373ee7e73989df778345852f83acc5c0
 		$becas->Select('becas_autorizadas.*','alumno.nocuenta','beca_tipo.beca','estatus_alumno.estatus','niveles_academicos.nombre');
 		
 		try {

@@ -67,7 +67,7 @@ Route::group(array('prefix' => '/api/{token}','before' => 'auth'), function()
 	Route::group(array('prefix' => '/cobros'), function(){
 		Route::get('/', array('as' => 'cobros', 'uses' => 'CobrosController@index'));
 		Route::get('/show/{id}', array('as' => 'cobros', 'uses' => 'CobrosController@show'));
-		Route::get('/show_estado_de_cuenta', array('as' => 'estado_de_cuenta_alumno', 'uses' => 'CobrosController@show_estado_de_cuenta'));
+		Route::get('/show_estado_de_cuenta/{nocuenta}', array('as' => 'estado_de_cuenta_alumno', 'uses' => 'CobrosController@show_estado_de_cuenta'));
 	});
 });
 

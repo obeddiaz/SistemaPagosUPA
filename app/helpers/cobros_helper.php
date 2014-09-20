@@ -22,11 +22,7 @@
 				}
 
 				$response[$key_row]['beca']=$data[$key_row]->monto*intval($porcentaje_beca)/100;
-<<<<<<< HEAD
-				//$response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca)/100);
-=======
 				$response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca)/100);
->>>>>>> 4b175ee7373ee7e73989df778345852f83acc5c0
 				
 				$referencia=DB::table('referencia')
 					->Where('referencia.alumnos_cobros_id', $data[$key_row]->id)
