@@ -43,7 +43,7 @@ Route::group(array('prefix' => '/api/{token}','before' => 'auth'), function()
 		Route::get('/profesor/{id?}', array('as' => 'personas_alumno', 'uses' => 'PersonasController@show_profesor'));
 		Route::get('/{id}', array('as' => 'persona_by_id', 'uses' => 'PersonasController@show'));
 		Route::get('/alumno/matricula/{nocuenta}', array('as' => 'personas_alumno_matricula', 'uses' => 'PersonasController@show_alumno_by_nocuenta'));
-		Route::get('/alumno/nombre/{params}', array('as' => 'personas_alumno_nombre', 'uses' => 'PersonasController@show_alumno_by_nombre'));
+		Route::get('/alumno/nombre/', array('as' => 'personas_alumno_nombre', 'uses' => 'PersonasController@show_alumno_by_nombre'));
 	});
 
 	Route::group(array('prefix' => '/nivel_academico'), function(){
@@ -54,8 +54,8 @@ Route::group(array('prefix' => '/api/{token}','before' => 'auth'), function()
 
 	Route::group(array('prefix' => '/becas'), function(){
 		Route::get('/', array('as' => 'becas', 'uses' => 'BecasController@index'));
-		Route::get('/show/{params}', array('as' => 'becas', 'uses' => 'BecasController@show'));
-		Route::get('/show_by_matricula/{params}', array('as' => 'becas_alumno', 'uses' => 'BecasController@show_by_nocuenta'));
+		Route::get('/show/', array('as' => 'becas', 'uses' => 'BecasController@show'));
+		Route::get('/show_by_matricula/', array('as' => 'becas_alumno', 'uses' => 'BecasController@show_by_nocuenta'));
 	});
 
 	Route::group(array('prefix' => '/grados'), function(){

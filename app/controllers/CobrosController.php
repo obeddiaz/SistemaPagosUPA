@@ -27,7 +27,7 @@ class CobrosController extends \BaseController {
 	public function create($token)
 	{
 
-		$params=Input::post();
+		$params=Input::get();
 		$info_new=array(
 			'descripcion'=>$params['descripcion '],
 			'estatus'=>$params['estatus']
