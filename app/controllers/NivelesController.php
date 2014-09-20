@@ -27,12 +27,12 @@ class NivelesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($toke,$params)
+	public function create($toke)
 	{
-		$params=json_decode($params);
-		$info= array('nombre' => $params->nombre,
-			'descripcion' => $params->descripcion,
-			'estatus' => $params->estatus);
+		$params=Input::get();
+		$info= array('nombre' => $params['nombre'],
+			'descripcion' => $params['descripcion'],
+			'estatus' => $params['estatus'];
 		$id_niveles=Niveles::InsertGetId($info);
 		if ($id_niveles) {
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'New ciclo created ID'.$id_niveles));
@@ -109,12 +109,12 @@ class NivelesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token,$params)
+	public function update($token)
 	{
-		$params=json_decode($params);
+		$params=Input::get();
 		try {
-			$id=$params->id;
-			unset($params->id);
+			$id=$params['id'];
+			unset($params['id']);
 
 			DB::table('niveles_academicos')
 					->where('id', $id)

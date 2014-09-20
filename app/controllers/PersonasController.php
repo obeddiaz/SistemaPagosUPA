@@ -172,10 +172,9 @@ class PersonasController extends \BaseController {
 	}
 
 
-	public function show_alumno_by_nombre($token,$params)
+	public function show_alumno_by_nombre($token)
 	{
-
-		$params=json_decode($params);
+		$params=Input::get();
 		$persona=DB::table('persona');
 		$persona_info=$persona->Select(
 					'alumno.nocuenta as matricula',
@@ -183,14 +182,14 @@ class PersonasController extends \BaseController {
 					db::raw('concat(persona.nombre," ",persona.apellidopat," ",persona.apellidomat) as nombre')
 					)
 					->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
-					->where('persona.nombre','LIKE','%'.$params->nombre.'%');
-		if (isset($params->apellidopat)) {
-			$persona_info=$persona_info->where('persona.apellidopat',$params->apellidopat);
+					->where('persona.nombre','LIKE','%'.$params['nombre'].'%');
+		if (isset($params['apellidopat'])) {
+			$persona_info=$persona_info->where('persona.apellidopat',$params['apellidopat']);
 		}
 					
-		if(isset($params->apellidomat))
+		if(isset($params['apellidopat']))
 		{
-			$persona_info=$persona_info->where('persona.apellidomat',$params->apellidomat);
+			$persona_info=$persona_info->where('persona.apellidomat',$params['apellidopat']);
 		}
 					
 

@@ -20,14 +20,14 @@ class GradosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($toke,$params)
+	public function create($toke)
 	{
-		$params=json_decode($params);
+		$params=Input::get();
 		try {
 			$info=array(
-				'nocuenta'=>$params->nocuenta,
-				'idcurso'=>$params->idcurso,
-				'grado'=>$params->grado
+				'nocuenta'=>$params['nocuenta'],
+				'idcurso'=>$params['idcurso'],
+				'grado'=>$params['grado']
 			);
 			DB::table('cuatrimestre_cursado')->Insert($info);
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'New cuatrimestre cursado'));	
@@ -112,12 +112,12 @@ class GradosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token,$params)
+	public function update($token)
 	{
-		$params=json_decode($params);
+		$params=Input::get();
 		try {
-			$nocuenta=$params->nocuenta;
-			unset($params->nocuenta);
+			$nocuenta=$params['nocuenta'];
+			unset($params['nocuenta']);
 
 			DB::table('cuatrimestre_cursado')
 					->where('nocuenta', $nocuenta)
@@ -139,11 +139,11 @@ class GradosController extends \BaseController {
 	 */
 	public function destroy($token,$params)
 	{
-		$params=json_decode($params);
+		$params=Input::get();
 		try {
 			DB::table('cuatrimestre_cursado')
-				->where('nocuenta', '=', $params->nocuenta)
-				->where('grado', '=', $params->grado)
+				->where('nocuenta', '=', $params['nocuenta'])
+				->where('grado', '=', $params['grado'])
 				->delete();
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Delete'));
 		} catch (Exception $e) {
