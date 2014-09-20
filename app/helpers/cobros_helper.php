@@ -1,5 +1,6 @@
 <?php
 	// My common functions
+
 	function Ensamble_estado_de_cuenta($data)
 	{
 		$response=array();
@@ -15,12 +16,11 @@
 				->Select('beca_porcentaje.porcentaje as porcentaje')
 				->get();
 
-				if (!$porcentaje_beca && !empty($porcentaje_beca)) {
+				if ($porcentaje_beca && !empty($porcentaje_beca)) {
 					$porcentaje_beca=$porcentaje_beca[0]->porcentaje;
 				} else {
-					$porcentaje_beca=0;
+					$porcentaje_beca="0";
 				}
-
 				$response[$key_row]['beca']=$data[$key_row]->monto*intval($porcentaje_beca)/100;
 				//$response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca)/100);
 				
@@ -29,22 +29,24 @@
 					->Select('*')
 					->get();
 
-				if ($referencia[0]->estatus!=0) {
-					$response[$key_row]['pago']=$referencia[0]->fecha_pago;
+				if (isset($referencia[0])) {
+					if ($referencia[0]->estatus!=0) {
+						$response[$key_row]['pago']=$referencia[0]->fecha_pago;
+					} else {
+						$response[$key_row]['pago']="";
+					}
+					$response[$key_row]['concepto']=$data[$key_row]->concepto_cobro;
+					$response[$key_row]['importe']=$data[$key_row]->monto;
+						
+					if ($data[$key_row]->fecha_limite<date('Y-m-d')) {
+						$response[$key_row]['recargo']=$referencia[0]->recargo + 70;
+					} else {
+						$response[$key_row]['recargo']=0.0;	
+					}
 				} else {
-					$response[$key_row]['pago']="";
+					echo json_encode(array('error' => true,'messsage'=>'No reference','response'=>''));
+					die();
 				}
-				
-				$response[$key_row]['concepto']=$data[$key_row]->concepto_cobro;
-				$response[$key_row]['importe']=$data[$key_row]->monto;
-				
-				if ($data[$key_row]->fecha_limite<date('Y-m-d')) {
-					$response[$key_row]['recargo']=$referencia[0]->recargo + 70;
-				} else {
-					$response[$key_row]['recargo']=0.0;	
-				}
-
-
 			}
 		}
 		return $response;

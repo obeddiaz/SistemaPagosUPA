@@ -27,12 +27,12 @@ class CiclosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($toke,$params)
+	public function create($toke)
 	{
-		$params=json_decode($params);
+		$params=Input::post();
 		$info=array(
-				'descripcion'=>$params->descripcion,
-				'abreviacion'=>$params->abreviacion
+				'descripcion'=>$params['descripcion'],
+				'abreviacion'=>$params['abreviacion']
 			);
 		$id_ciclo=Ciclos::InsertGetId($info);
 		if ($id_ciclo) {
@@ -60,12 +60,13 @@ class CiclosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($token,$id)
+	public function show($token)
 	{
+		$params=Input::get();
 		$ciclos_info=Ciclos::Select(
 		'*'
 		)
-		->where('ciclos.id', $id)
+		->where('ciclos.id', $params['id'])
 		->first();
 		if($ciclos_info)
 		{
@@ -76,13 +77,14 @@ class CiclosController extends \BaseController {
 	}
 
 
-	public function show_by_nocuenta($token,$nocuenta)
+	public function show_by_nocuenta($token)
 	{
+		$params=Input::get();
 		$ciclos_info=Ciclos::Select(
 		'ciclos.*'
 		)
 		->join('cuatrimestre_cursado', 'cuatrimestre_cursado.idciclo', '=','ciclos.id')
-		->where('cuatrimestre_cursado.nocuenta', $nocuenta)
+		->where('cuatrimestre_cursado.nocuenta', $params['nocuenta'])
 		->get();
 		if($ciclos_info)
 		{
@@ -109,17 +111,14 @@ class CiclosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token,$params)
+	public function update($token)
 	{
-		$params=json_decode($params);
+		$params=Input::post();
 		try {
-			$id=$params->id;
-			unset($params->id;
-
 			DB::table('ciclos')
-					->where('id', $id)
-	        ->update($params);	
-	    echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Update'));
+				->where('id', $params['id'])
+	        	->update($params);	
+	    	echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Update'));
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	
 		}
@@ -133,10 +132,11 @@ class CiclosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($token,$id)
+	public function destroy($token)
 	{
+		$params=Input::post();
 		try {
-			DB::table('ciclos')->where('id', '=', $id)->delete();
+			DB::table('ciclos')->where('id', '=', $params['id'])->delete();
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Delete'));
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));		
