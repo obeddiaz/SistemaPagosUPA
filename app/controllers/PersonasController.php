@@ -183,13 +183,13 @@ class PersonasController extends \BaseController {
 					)
 					->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
 					->where('persona.nombre','LIKE','%'.$params['nombre'].'%');
-		if (isset($params['apellidopat'])) {
+		if (isset($params['apellidopat'])&&$params['apellidopat']!="") {
 			$persona_info=$persona_info->where('persona.apellidopat',$params['apellidopat']);
 		}
 					
-		if(isset($params['apellidopat']))
+		if(isset($params['apellidomat'])&&$params['apellidomat']!="")
 		{
-			$persona_info=$persona_info->where('persona.apellidomat',$params['apellidopat']);
+			$persona_info=$persona_info->where('persona.apellidomat',$params['apellidomat']);
 		}
 					
 
