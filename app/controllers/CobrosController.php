@@ -42,20 +42,52 @@ class CobrosController extends \BaseController {
 
 	public function create_alumno($token)
 	{
-		$params=Input::post();
+		$params=Input::get();
+		//var_dump(json_decode($params['id_beca_autorizada']));die();
 		$info_new=array(
 			'subconceptos_id'=>$params['subconceptos_id'],
 			'nocuenta'=>$params['nocuenta'],
 			'ciclos_id'=>$params['ciclos_id'],
 			'mes_ciclo_id'=>$params['mes_ciclo_id'],
-			'id_beca_autorizada'=>$params['id_beca_autorizada'],
+			'id_beca_autorizada'=>json_decode($params['id_beca_autorizada']),
 			'fecha_solicitud'=>$params['fecha_solicitud'],
-			'fecha_limite'=>$params['fecha_limite']
+			'fecha_limite'=>$params['fecha_limite'],
+			'cobros_id'=>$params['cobros_id']
 		);
 		try {
 			$new_id=DB::table('alumnos_cobros')->insertGetId($info_new);
+			$ref_info_query=DB::table('alumnos_cobros')
+				->join('cobros', 'alumnos_cobros.cobros_id', '=','cobros.id_cobro')
+				->join('alumno', 'alumnos_cobros.nocuenta', '=','alumno.nocuenta')
+				->join('curso', 'curso.idcurso', '=','alumno.idcurso')
+				->where('alumnos_cobros.id','=',$new_id)
+				->Select('curso.nombre_corto as nombre',
+						 'cobros.monto as monto',
+						 db::raw("UPPER(cobros.descripcion) as des"))
+				->get();
+
+				
+			$referencias_library=new Referencias(); 
+			$referencia=$referencias_library->generar(
+				$ref_info_query[0]->nombre,
+				$params['nocuenta'], 
+				$ref_info_query[0]->des,
+				$ref_info_query[0]->monto,
+				date("Y-m-d H:i:s")
+			);
+			$info_referencia=array(
+				'referencia' => $referencia, 
+				'recargo'=> 0 ,
+				'descuento'=> 0,
+				'estatus' => 0,
+				'fecha_pago' => null,
+				'saldo'=> 0,
+				'alumnos_cobros_id' => $new_id
+			);
+			setReferencia($info_referencia);
+			
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'New alumnos_cobros created ID:'.$new_id));
-		} catch (Exception $e) {
+	} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	
 		}
 	}
@@ -92,11 +124,6 @@ class CobrosController extends \BaseController {
 
 	public function show_estado_de_cuenta($token)
 	{
-		//$params=json_decode($params);
-		//var_dump(Input::get());
-		$referencias=new Referencias();
-		// $referencias->generar('ISEI','UP100682', 'INS', '225', '31-25-2014')
-		
 		$params=Input::get();
 		if (isset($params['nocuenta']) && isset($params['ciclosid'])) 
 		{
@@ -125,6 +152,70 @@ class CobrosController extends \BaseController {
 			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
 		}
 	}
+	public function show_info_alumno_estado_de_cuenta($token)
+	{
+		$params=Input::get();
+		$ciclos=DB::table('cuatrimestre_cursado')
+			->join('ciclos','cuatrimestre_cursado.idciclo','=','ciclos.id')
+			->where('cuatrimestre_cursado.nocuenta','=',$params['nocuenta'])
+			->Select('ciclos.id as ciclos_id','ciclos.abreviacion as ciclo')
+			->get();
+
+		$info_alum=DB::table('alumno')
+			->join('cuatrimestre_cursado','alumno.nocuenta','=','cuatrimestre_cursado.nocuenta')
+			->join('curso', 'alumno.idcurso', '=','curso.idcurso')
+			->join('niveles_academicos', 'curso.nivel', '=','niveles_academicos.nombre')
+			->join('persona', 'alumno.idpersonas', '=','persona.idpersonas')
+			->where('alumno.nocuenta','=',$params['nocuenta'])
+			->Select(
+					 'niveles_academicos.nombre as nivel',
+					 'alumno.promanterior as promedio',
+					 db::raw('max(cuatrimestre_cursado.grado) as grado'),
+					 db::raw('concat(persona.nombre," ",persona.apellidopat," ",persona.apellidomat) as nombre')
+					 )
+			->get();
+
+		$beca_autorizada=DB::table('becas_autorizadas')
+						->where('becas_autorizadas.nocuenta','=',$params['nocuenta'])
+						->Select('becas_autorizadas.idbecas_autorizadas as id')
+						->get();
+		if(isset($beca_autorizada[0]))
+		{
+			//$beca_autorizada=$beca_autorizada[0]->id;
+			
+			$porcentaje_beca=DB::table('beca_porcentaje')
+				->join('becas_autorizadas', 'beca_porcentaje.idbeca_tipo', '=','becas_autorizadas.idbeca_tipo')
+				->join('beca_tipo', 'beca_porcentaje.idbeca_tipo', '=','beca_tipo.idbeca_tipo')
+				->where('becas_autorizadas.idbecas_autorizadas', $beca_autorizada[0]->id)
+				->where('beca_porcentaje.calificacion_inicial','<=' ,$info_alum[0]->promedio)
+				->where('beca_porcentaje.calificacion_final','>=' ,$info_alum[0]->promedio)
+				->Select('beca_porcentaje.porcentaje as porcentaje',
+						 'beca_tipo.beca as tipo',
+						 'becas_autorizadas.estatus as estatus')
+				->get();
+
+			$beca=$porcentaje_beca[0]->tipo.' '.$porcentaje_beca[0]->porcentaje.'% ';
+			if ($porcentaje_beca[0]->estatus==0) {
+				$beca=$beca.'(CANCELADA)';
+			}
+
+		} else{
+			$porcentaje_beca='N/A';
+		}
+		
+
+		$data['ciclos']=$ciclos;
+		$data['grado']=$info_alum[0]->grado;
+		$data['nivel']=$info_alum[0]->nivel;
+		$data['nombre']=$info_alum[0]->nombre;
+		$data['beca']=$porcentaje_beca;
+		if($data)
+		{
+			echo json_encode(array('error' => false,'messsage'=>'','response'=>$data));
+		} else {
+			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+		}
+	}
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -146,7 +237,7 @@ class CobrosController extends \BaseController {
 	public function update($token)
 	{
 		try {
-			$params=Input::post();
+			$params=Input::get();
 			DB::table('cobros')
 					->where('id', $params['id'])
 	        		->update($params);
@@ -166,7 +257,7 @@ class CobrosController extends \BaseController {
 	 */
 	public function destroy($token)
 	{
-		$params=Input::post();
+		$params=Input::get();
 		try {
 			DB::table('cobros')->where('id', '=', $params['id'])->delete();
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Delete'));

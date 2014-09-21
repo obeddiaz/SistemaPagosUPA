@@ -38,11 +38,18 @@
 					$response[$key_row]['importe']=$data[$key_row]->monto;
 						
 					if ($data[$key_row]->fecha_limite<date('Y-m-d')) {
-						$response[$key_row]['recargo']=$referencia[0]->recargo + 70;
+						$segundos=strtotime($data[$key_row]->fecha_limite) - strtotime('now');
+						$meses_retraso=(intval($segundos/60/60/24/30))+1;
+						$response[$key_row]['recargo']=70*$meses_retraso;
 					} else {
-						$response[$key_row]['recargo']=0.0;	
+						$response[$key_row]['recargo']=intval($referencia[0]->recargo);	
 					}
-                                        $response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca)/100);
+                    $response[$key_row]['saldo']=$response[$key_row]['recargo']+$response[$key_row]['importe']-($data[$key_row]->monto*intval($porcentaje_beca)/100);
+
+                    $referencia_new['recargo']=$response[$key_row]['recargo'];
+                    $referencia_new['saldo']=$response[$key_row]['saldo'];
+                    $referencia_new['id']=$referencia[0]->id;
+                    setReferencia($referencia_new);
 				} else {
 					echo json_encode(array('error' => true,'messsage'=>'No reference','response'=>''));
 					die();
@@ -50,5 +57,20 @@
 			}
 		}
 		return $response;
+	}
+	function setReferencia($data)
+	{
+		try {
+			if (!isset($data['id'])) {
+				DB::table('referencia')->Insert($data);
+			}	else{
+				DB::table('referencia')->where('referencia.id','=',$data['id'])
+									   ->update($data);
+			}
+	    } catch (Exception $e) {
+			echo json_encode(array('error' => true,'messsage'=>'Bad data','response'=>''));
+			die();
+		}
+
 	}
 ?>	
