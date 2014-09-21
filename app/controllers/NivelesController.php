@@ -32,7 +32,7 @@ class NivelesController extends \BaseController {
 		$params=Input::get();
 		$info= array('nombre' => $params['nombre'],
 			'descripcion' => $params['descripcion'],
-			'estatus' => $params['estatus'];
+			'estatus' => $params['estatus']);
 		$id_niveles=Niveles::InsertGetId($info);
 		if ($id_niveles) {
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'New ciclo created ID'.$id_niveles));

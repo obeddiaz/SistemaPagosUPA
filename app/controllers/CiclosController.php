@@ -113,7 +113,7 @@ class CiclosController extends \BaseController {
 	 */
 	public function update($token)
 	{
-		$params=Input::post();
+		$params=Input::get();
 		try {
 			DB::table('ciclos')
 				->where('id', $params['id'])

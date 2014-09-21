@@ -38,12 +38,12 @@ Route::group(array('prefix' => '/api/{token}','before' => 'auth'), function()
 	//resource Personas
 	Route::group(array('prefix' => '/personas'), function(){
 		Route::get('/', array('as' => 'personas', 'uses' => 'PersonasController@index'));
+                Route::get('/alumno/nombre/', array('as' => 'personas_alumno_nombre', 'uses' => 'PersonasController@show_alumno_by_nombre'));
 		Route::get('/admin/{id?}', array('as' => 'personas_admin', 'uses' => 'PersonasController@show_admin'));
 		Route::get('/alumno/{id?}', array('as' => 'personas_alumno', 'uses' => 'PersonasController@show_alumno'));
 		Route::get('/profesor/{id?}', array('as' => 'personas_alumno', 'uses' => 'PersonasController@show_profesor'));
 		Route::get('/{id}', array('as' => 'persona_by_id', 'uses' => 'PersonasController@show'));
 		Route::get('/alumno/matricula/{nocuenta}', array('as' => 'personas_alumno_matricula', 'uses' => 'PersonasController@show_alumno_by_nocuenta'));
-		Route::get('/alumno/nombre/', array('as' => 'personas_alumno_nombre', 'uses' => 'PersonasController@show_alumno_by_nombre'));
 	});
 
 	Route::group(array('prefix' => '/nivel_academico'), function(){
@@ -68,6 +68,11 @@ Route::group(array('prefix' => '/api/{token}','before' => 'auth'), function()
 		Route::get('/', array('as' => 'cobros', 'uses' => 'CobrosController@index'));
 		Route::get('/show/{id}', array('as' => 'cobros', 'uses' => 'CobrosController@show'));
 		Route::get('/show_estado_de_cuenta', array('as' => 'estado_de_cuenta_alumno', 'uses' => 'CobrosController@show_estado_de_cuenta'));
+	});
+        Route::group(array('prefix' => '/ciclos'), function(){
+		Route::get('/', array('as' => 'cobros', 'uses' => 'CobrosController@index'));
+		Route::get('/show/{id}', array('as' => 'cobros', 'uses' => 'CobrosController@show'));
+		Route::get('/show_by_nocuenta', array('as' => 'estado_de_cuenta_alumno', 'uses' => 'CiclosController@show_by_nocuenta'));
 	});
 });
 
