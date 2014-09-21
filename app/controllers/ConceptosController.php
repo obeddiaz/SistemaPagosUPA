@@ -49,7 +49,7 @@ class ConceptosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($token,$id)
+	public function show($id)
 	{
 		$show_subconceptos = new SubConcepto;
 		$show_subconceptos->where('concepto_id','=',$id)->get();
@@ -65,7 +65,7 @@ class ConceptosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($token,$id)
+	public function edit($id)
 	{
 		return $id;
 	}
@@ -77,7 +77,7 @@ class ConceptosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token,$id)
+	public function update($id)
 	{
 		//
 	}
@@ -89,7 +89,7 @@ class ConceptosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($token,$id)
+	public function destroy($id)
 	{
 		$concepto = new Concepto;
 		if (!is_null($concepto->find($id))) {

@@ -27,7 +27,7 @@ class NivelesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($toke)
+	public function create()
 	{
 		$params=Input::get();
 		$info= array('nombre' => $params['nombre'],
@@ -59,7 +59,7 @@ class NivelesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($token,$id)
+	public function show($id)
 	{
 		$niveles_info=Niveles::Select(
 		'*'
@@ -74,7 +74,7 @@ class NivelesController extends \BaseController {
 		}
 	}
 
-	public function show_by_nocuenta($token,$nocuenta)
+	public function show_by_nocuenta($nocuenta)
 
 	{
 		$niveles_info=Niveles::Select(
@@ -109,7 +109,7 @@ class NivelesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token)
+	public function update()
 	{
 		$params=Input::get();
 		try {
@@ -133,7 +133,7 @@ class NivelesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($token,$id)
+	public function destroy($id)
 	{
 		try {
 			DB::table('niveles_academicos')->where('id', '=', $id)->delete();

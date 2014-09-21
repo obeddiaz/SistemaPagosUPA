@@ -27,7 +27,7 @@ class BecasController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($toke,$params)
+	public function create($params)
 	{
 		$params=json_decode($params);
 		$info=array(
@@ -60,7 +60,7 @@ class BecasController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($token,$params)
+	public function show($params)
 	{
 		$params=json_decode($params);
 		$becas= DB::table('becas_autorizadas');
@@ -82,7 +82,7 @@ class BecasController extends \BaseController {
 		}
 	}
 
-	public function show_by_nocuenta($token,$params)
+	public function show_by_nocuenta($params)
 	{
 		$params=json_decode($params);
 		$becas_info=DB::table('beca_porcentaje')
@@ -118,7 +118,7 @@ class BecasController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token,$params)
+	public function update($params)
 	{
 		$params=json_decode($params);
 		try {
@@ -136,7 +136,7 @@ class BecasController extends \BaseController {
 		
 	}
 
-	public function update_autorizada($token,$params)
+	public function update_autorizada($params)
 	{
 		$params=json_decode($params);
 		try {
@@ -159,7 +159,7 @@ class BecasController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($token,$id)
+	public function destroy($id)
 	{
 		try {
 			DB::table('beca_tipo')->where('id', '=', $id)->delete();
@@ -169,7 +169,7 @@ class BecasController extends \BaseController {
 		}
 	}
 
-	public function destroy_autrizada($token,$nocuenta)
+	public function destroy_autrizada($nocuenta)
 	{
 		try {
 			DB::table('becas_autorizadas')->where('nocuenta', '=', $nocuenta)->delete();

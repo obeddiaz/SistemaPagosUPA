@@ -20,7 +20,7 @@ class GradosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($toke)
+	public function create()
 	{
 		$params=Input::get();
 		try {
@@ -60,7 +60,7 @@ class GradosController extends \BaseController {
 		//
 	}
 
-	public function show_by_nocuenta($token,$nocuenta)
+	public function show_by_nocuenta($nocuenta)
 	{
 
 		$cuatrimestre_info=Grados::Select(
@@ -112,7 +112,7 @@ class GradosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token)
+	public function update()
 	{
 		$params=Input::get();
 		try {
@@ -137,7 +137,7 @@ class GradosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($token,$params)
+	public function destroy($params)
 	{
 		$params=Input::get();
 		try {

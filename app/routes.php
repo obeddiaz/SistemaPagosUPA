@@ -13,7 +13,7 @@
 Route::get('/', function() {
     return 'user no logged';
 });
-Route::group(array('prefix' => '/api/{token}', 'before' => 'auth'), function() {
+Route::group(array('prefix' => '/api', 'before' => 'auth'), function() {
 
     //resource conceptos 
     Route::group(array('prefix' => '/conceptos'), function() {

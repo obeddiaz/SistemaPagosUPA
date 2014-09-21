@@ -19,7 +19,7 @@ class SubConceptosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($token,$id_concepto)
+	public function create($id_concepto)
 	{
 		$sub_concepto = new SubConcepto;
 		$sub_concepto->sub_concepto=Input::get('sub_concepto');

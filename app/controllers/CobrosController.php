@@ -24,7 +24,7 @@ class CobrosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($token)
+	public function create()
 	{
 
 		$params=Input::get();
@@ -40,7 +40,7 @@ class CobrosController extends \BaseController {
 		}
 	}
 
-	public function create_alumno($token)
+	public function create_alumno()
 	{
 		$params=Input::get();
 		//var_dump(json_decode($params['id_beca_autorizada']));die();
@@ -110,7 +110,7 @@ class CobrosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($token)
+	public function show()
 	{
 		$params=Input::get();
 		$cobro_info=Cobros::find($params['id']);	
@@ -122,7 +122,7 @@ class CobrosController extends \BaseController {
 		}
 	}
 
-	public function show_estado_de_cuenta($token)
+	public function show_estado_de_cuenta()
 	{
 		$params=Input::get();
 		if (isset($params['nocuenta']) && isset($params['ciclosid'])) 
@@ -152,7 +152,7 @@ class CobrosController extends \BaseController {
 			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
 		}
 	}
-	public function show_info_alumno_estado_de_cuenta($token)
+	public function show_info_alumno_estado_de_cuenta()
 	{
 		$params=Input::get();
 		$ciclos=DB::table('cuatrimestre_cursado')
@@ -234,7 +234,7 @@ class CobrosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token)
+	public function update()
 	{
 		try {
 			$params=Input::get();
@@ -255,7 +255,7 @@ class CobrosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($token)
+	public function destroy()
 	{
 		$params=Input::get();
 		try {
@@ -265,7 +265,4 @@ class CobrosController extends \BaseController {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));		
 		}
 	}
-
-
-
 }	

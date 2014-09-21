@@ -27,7 +27,7 @@ class CiclosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($toke)
+	public function create()
 	{
 		$params=Input::post();
 		$info=array(
@@ -60,7 +60,7 @@ class CiclosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($token)
+	public function show()
 	{
 		$params=Input::get();
 		$ciclos_info=Ciclos::Select(
@@ -77,7 +77,7 @@ class CiclosController extends \BaseController {
 	}
 
 
-	public function show_by_nocuenta($token)
+	public function show_by_nocuenta()
 	{
 		$params=Input::get();
 		$ciclos_info=Ciclos::Select(
@@ -111,7 +111,7 @@ class CiclosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($token)
+	public function update()
 	{
 		$params=Input::get();
 		try {
@@ -132,7 +132,7 @@ class CiclosController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($token)
+	public function destroy()
 	{
 		$params=Input::post();
 		try {

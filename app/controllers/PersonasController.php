@@ -58,7 +58,7 @@ class PersonasController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($token,$id)
+	public function show($id)
 	{
 		$persona_info=Persona::Select(
 												'persona.idpersonas',
@@ -80,7 +80,7 @@ class PersonasController extends \BaseController {
 			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
 		}
 	}
-	public function show_admin($token,$id=null)
+	public function show_admin($id=null)
 	{
 		$persona=new Persona;
 		$persona_info=$persona->Select(
@@ -110,7 +110,7 @@ class PersonasController extends \BaseController {
 
 	}
 
-	public function show_alumno($token,$id=null)
+	public function show_alumno($id=null)
 	{
 		$persona=new Persona;
 		$persona_info=$persona->Select(
@@ -140,7 +140,7 @@ class PersonasController extends \BaseController {
 		}
 	}
 
-	public function show_alumno_by_nocuenta($token,$nocuenta)
+	public function show_alumno_by_nocuenta($nocuenta)
 	{
 		$persona=DB::table('persona');
 		$persona_info=$persona->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
@@ -172,7 +172,7 @@ class PersonasController extends \BaseController {
 	}
 
 
-	public function show_alumno_by_nombre($token)
+	public function show_alumno_by_nombre()
 	{
 		$params=Input::get();
 		$persona=DB::table('persona');
@@ -201,7 +201,7 @@ class PersonasController extends \BaseController {
 		}
 	}
 
-	public function show_profesor($token,$id=null)
+	public function show_profesor($id=null)
 	{
 			$persona=new Persona;
 			$persona_info=$persona->Select(
