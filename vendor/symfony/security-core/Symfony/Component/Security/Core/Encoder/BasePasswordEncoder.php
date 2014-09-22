@@ -89,7 +89,7 @@ abstract class BasePasswordEncoder implements PasswordEncoderInterface
     /**
      * Checks if the password is too long.
      *
-     * @param string $password The password to check
+     * @param string $password The password
      *
      * @return bool true if the password is too long, false otherwise
      */

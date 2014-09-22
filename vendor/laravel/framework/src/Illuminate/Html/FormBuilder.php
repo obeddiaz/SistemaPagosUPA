@@ -960,7 +960,7 @@ class FormBuilder {
 	 * Set the session store implementation.
 	 *
 	 * @param  \Illuminate\Session\Store  $session
-	 * @return $this
+	 * @return \Illuminate\Html\FormBuilder
 	 */
 	public function setSessionStore(Session $session)
 	{

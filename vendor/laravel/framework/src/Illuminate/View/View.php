@@ -159,7 +159,7 @@ class View implements ArrayAccess, Renderable {
 	 *
 	 * @param  string|array  $key
 	 * @param  mixed   $value
-	 * @return $this
+	 * @return \Illuminate\View\View
 	 */
 	public function with($key, $value = null)
 	{
@@ -181,7 +181,7 @@ class View implements ArrayAccess, Renderable {
 	 * @param  string  $key
 	 * @param  string  $view
 	 * @param  array   $data
-	 * @return $this
+	 * @return \Illuminate\View\View
 	 */
 	public function nest($key, $view, array $data = array())
 	{
@@ -192,7 +192,7 @@ class View implements ArrayAccess, Renderable {
 	 * Add validation errors to the view.
 	 *
 	 * @param  \Illuminate\Support\Contracts\MessageProviderInterface|array  $provider
-	 * @return $this
+	 * @return \Illuminate\View\View
 	 */
 	public function withErrors($provider)
 	{

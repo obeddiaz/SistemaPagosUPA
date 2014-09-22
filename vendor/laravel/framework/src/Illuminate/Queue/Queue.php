@@ -104,7 +104,7 @@ abstract class Queue {
 		}
 		else
 		{
-			return (int) $delay;
+			return intval($delay);
 		}
 	}
 

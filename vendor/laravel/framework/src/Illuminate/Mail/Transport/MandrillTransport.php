@@ -60,7 +60,7 @@ class MandrillTransport implements Swift_Transport {
 			'body' => [
 				'key' => $this->key,
 				'raw_message' => (string) $message,
-				'async' => false,
+				'async' => true,
 			],
 		]);
 	}

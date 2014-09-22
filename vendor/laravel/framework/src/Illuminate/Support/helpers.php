@@ -492,7 +492,7 @@ if ( ! function_exists('dd'))
 	/**
 	 * Dump the passed variables and end the script.
 	 *
-	 * @param  mixed
+	 * @param  dynamic  mixed
 	 * @return void
 	 */
 	function dd()
@@ -693,15 +693,13 @@ if ( ! function_exists('route'))
 	/**
 	 * Generate a URL to a named route.
 	 *
-	 * @param  string  $name
+	 * @param  string  $route
 	 * @param  array   $parameters
-	 * @param  bool  $absolute
-	 * @param  \Illuminate\Routing\Route $route
 	 * @return string
 	 */
-	function route($name, $parameters = array(), $absolute = true, $route = null)
+	function route($route, $parameters = array())
 	{
-		return app('url')->route($name, $parameters, $absolute, $route);
+		return app('url')->route($route, $parameters);
 	}
 }
 

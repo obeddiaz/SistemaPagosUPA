@@ -77,7 +77,7 @@ class Builder {
 			return $this->findMany($id, $columns);
 		}
 
-		$this->query->where($this->model->getQualifiedKeyName(), '=', $id);
+		$this->query->where($this->model->getKeyName(), '=', $id);
 
 		return $this->first($columns);
 	}
@@ -93,7 +93,7 @@ class Builder {
 	{
 		if (empty($id)) return $this->model->newCollection();
 
-		$this->query->whereIn($this->model->getQualifiedKeyName(), $id);
+		$this->query->whereIn($this->model->getKeyName(), $id);
 
 		return $this->get($columns);
     }
@@ -105,7 +105,7 @@ class Builder {
 	 * @param  array  $columns
 	 * @return \Illuminate\Database\Eloquent\Model|static
 	 *
-	 * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+	 * @throws ModelNotFoundException
 	 */
 	public function findOrFail($id, $columns = array('*'))
 	{
@@ -131,7 +131,7 @@ class Builder {
 	 * @param  array  $columns
 	 * @return \Illuminate\Database\Eloquent\Model|static
 	 *
-	 * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+	 * @throws ModelNotFoundException
 	 */
 	public function firstOrFail($columns = array('*'))
 	{
@@ -405,7 +405,7 @@ class Builder {
 	 * Get the hydrated models without eager loading.
 	 *
 	 * @param  array  $columns
-	 * @return \Illuminate\Database\Eloquent\Model[]
+	 * @return array|static[]
 	 */
 	public function getModels($columns = array('*'))
 	{
@@ -556,7 +556,7 @@ class Builder {
 	 * @param  string  $operator
 	 * @param  mixed   $value
 	 * @param  string  $boolean
-	 * @return $this
+	 * @return \Illuminate\Database\Eloquent\Builder|static
 	 */
 	public function where($column, $operator = null, $value = null, $boolean = 'and')
 	{
@@ -711,8 +711,8 @@ class Builder {
 	/**
 	 * Set the relationships that should be eager loaded.
 	 *
-	 * @param  mixed  $relations
-	 * @return $this
+	 * @param  dynamic  $relations
+	 * @return \Illuminate\Database\Eloquent\Builder|static
 	 */
 	public function with($relations)
 	{
@@ -855,7 +855,7 @@ class Builder {
 	 * Set a model instance for the model being queried.
 	 *
 	 * @param  \Illuminate\Database\Eloquent\Model  $model
-	 * @return $this
+	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	public function setModel(Model $model)
 	{

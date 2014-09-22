@@ -10,7 +10,7 @@ trait ResponseTrait {
 	 * @param  string  $key
 	 * @param  string  $value
 	 * @param  bool    $replace
-	 * @return $this
+	 * @return \Illuminate\Http\Response
 	 */
 	public function header($key, $value, $replace = true)
 	{
@@ -23,7 +23,7 @@ trait ResponseTrait {
 	 * Add a cookie to the response.
 	 *
 	 * @param  \Symfony\Component\HttpFoundation\Cookie  $cookie
-	 * @return $this
+	 * @return \Illuminate\Http\Response
 	 */
 	public function withCookie(Cookie $cookie)
 	{

@@ -181,8 +181,10 @@ class PersonasController extends \BaseController {
 					'alumno.estatus as situacion',
 					db::raw('concat(persona.nombre," ",persona.apellidopat," ",persona.apellidomat) as nombre')
 					)
-					->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas')
-					->where('persona.nombre','LIKE','%'.$params['nombre'].'%');
+					->join('alumno', 'persona.idpersonas', '=', 'alumno.idpersonas');
+		if (isset($params['nombre'])&&$params['nombre']!="") {
+			$persona_info=$persona_info->where('persona.nombre','LIKE','%'.$params['nombre'].'%');
+		}
 		if (isset($params['apellidopat'])&&$params['apellidopat']!="") {
 			$persona_info=$persona_info->where('persona.apellidopat',$params['apellidopat']);
 		}

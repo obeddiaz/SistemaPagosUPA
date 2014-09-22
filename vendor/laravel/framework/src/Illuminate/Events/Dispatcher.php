@@ -53,7 +53,7 @@ class Dispatcher {
 	/**
 	 * Register an event listener with the dispatcher.
 	 *
-	 * @param  string|array  $events
+	 * @param  string|array  $event
 	 * @param  mixed   $listener
 	 * @param  int     $priority
 	 * @return void

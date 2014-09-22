@@ -33,8 +33,7 @@ class StringsTest extends TestFixture
       Carbon::resetToStringFormat();
       $this->assertSame($d->toDateTimeString(), ''.$d);
    }
-   public function testExtendedClassToString()
-   {
+   public function testExtendedClassToString() {
       $d = MyCarbon::now();
       $this->assertSame($d->toDateTimeString(), ''.$d);
    }

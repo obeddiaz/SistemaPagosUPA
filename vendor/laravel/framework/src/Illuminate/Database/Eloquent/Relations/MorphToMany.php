@@ -53,7 +53,7 @@ class MorphToMany extends BelongsToMany {
 	/**
 	 * Set the where clause for the relation query.
 	 *
-	 * @return $this
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	protected function setWhere()
 	{
@@ -128,9 +128,9 @@ class MorphToMany extends BelongsToMany {
 	{
 		$pivot = new MorphPivot($this->parent, $attributes, $this->table, $exists);
 
-		$pivot->setPivotKeys($this->foreignKey, $this->otherKey)
-			  ->setMorphType($this->morphType)
-			  ->setMorphClass($this->morphClass);
+		$pivot->setPivotKeys($this->foreignKey, $this->otherKey);
+
+		$pivot->setMorphType($this->morphType);
 
 		return $pivot;
 	}

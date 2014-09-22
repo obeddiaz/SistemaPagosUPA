@@ -1,6 +1,5 @@
 <?php namespace Illuminate\Support;
 
-use Patchwork\Utf8;
 use Illuminate\Support\Traits\MacroableTrait;
 
 class Str {
@@ -15,7 +14,7 @@ class Str {
 	 */
 	public static function ascii($value)
 	{
-		return Utf8::toAscii($value);
+		return \Patchwork\Utf8::toAscii($value);
 	}
 
 	/**
@@ -57,7 +56,7 @@ class Str {
 	{
 		foreach ((array) $needles as $needle)
 		{
-			if ((string) $needle === substr($haystack, -strlen($needle))) return true;
+			if ($needle == substr($haystack, -strlen($needle))) return true;
 		}
 
 		return false;

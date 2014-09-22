@@ -30,7 +30,7 @@ abstract class TestSessionListener implements EventSubscriberInterface
 {
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (!$event->isMasterRequest()) {
+        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
             return;
         }
 
@@ -55,7 +55,7 @@ abstract class TestSessionListener implements EventSubscriberInterface
      */
     public function onKernelResponse(FilterResponseEvent $event)
     {
-        if (!$event->isMasterRequest()) {
+        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
             return;
         }
 
@@ -78,7 +78,7 @@ abstract class TestSessionListener implements EventSubscriberInterface
     /**
      * Gets the session object.
      *
-     * @return SessionInterface|null A SessionInterface instance or null if no session is available
+     * @return SessionInterface|null A SessionInterface instance of null if no session is available
      */
     abstract protected function getSession();
 }

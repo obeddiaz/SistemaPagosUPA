@@ -28,7 +28,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	 * @param  string  $key
 	 * @param  string  $value
 	 * @param  bool  $replace
-	 * @return $this
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function header($key, $value, $replace = true)
 	{
@@ -62,7 +62,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	 * Add a cookie to the response.
 	 *
 	 * @param  \Symfony\Component\HttpFoundation\Cookie  $cookie
-	 * @return $this
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function withCookie(Cookie $cookie)
 	{
@@ -75,7 +75,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	 * Flash an array of input to the session.
 	 *
 	 * @param  array  $input
-	 * @return $this
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function withInput(array $input = null)
 	{
@@ -89,8 +89,8 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	/**
 	 * Flash an array of input to the session.
 	 *
-	 * @param  mixed  string
-	 * @return $this
+	 * @param  dynamic  string
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function onlyInput()
 	{
@@ -100,7 +100,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	/**
 	 * Flash an array of input to the session.
 	 *
-	 * @param  mixed  string
+	 * @param  dynamic  string
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function exceptInput()
@@ -113,7 +113,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	 *
 	 * @param  \Illuminate\Support\Contracts\MessageProviderInterface|array  $provider
 	 * @param  string  $key
-	 * @return $this
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function withErrors($provider, $key = 'default')
 	{

@@ -41,7 +41,7 @@ class MessageBag implements ArrayableInterface, Countable, JsonableInterface, Me
 	 *
 	 * @param  string  $key
 	 * @param  string  $message
-	 * @return $this
+	 * @return \Illuminate\Support\MessageBag
 	 */
 	public function add($key, $message)
 	{
@@ -57,7 +57,7 @@ class MessageBag implements ArrayableInterface, Countable, JsonableInterface, Me
 	 * Merge a new array of messages into the bag.
 	 *
 	 * @param  \Illuminate\Support\Contracts\MessageProviderInterface|array  $messages
-	 * @return $this
+	 * @return \Illuminate\Support\MessageBag
 	 */
 	public function merge($messages)
 	{

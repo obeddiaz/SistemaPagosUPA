@@ -68,7 +68,7 @@ class EloquentUserProvider implements UserProviderInterface {
 	 */
 	public function updateRememberToken(UserInterface $user, $token)
 	{
-		$user->setRememberToken($token);
+		$user->setAttribute($user->getRememberTokenName(), $token);
 
 		$user->save();
 	}

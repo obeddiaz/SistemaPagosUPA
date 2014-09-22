@@ -117,7 +117,7 @@ class Paginator implements ArrayableInterface, ArrayAccess, Countable, IteratorA
 	/**
 	 * Setup the pagination context (current and last page).
 	 *
-	 * @return $this
+	 * @return \Illuminate\Pagination\Paginator
 	 */
 	public function setupPaginationContext()
 	{
@@ -233,7 +233,7 @@ class Paginator implements ArrayableInterface, ArrayAccess, Countable, IteratorA
 	 * Get / set the URL fragment to be appended to URLs.
 	 *
 	 * @param  string|null  $fragment
-	 * @return $this|string
+	 * @return \Illuminate\Pagination\Paginator|string
 	 */
 	public function fragment($fragment = null)
 	{
@@ -257,7 +257,7 @@ class Paginator implements ArrayableInterface, ArrayAccess, Countable, IteratorA
 	 *
 	 * @param  string  $key
 	 * @param  string  $value
-	 * @return $this
+	 * @return \Illuminate\Pagination\Paginator
 	 */
 	public function appends($key, $value = null)
 	{
@@ -270,7 +270,7 @@ class Paginator implements ArrayableInterface, ArrayAccess, Countable, IteratorA
 	 * Add an array of query string values.
 	 *
 	 * @param  array  $keys
-	 * @return $this
+	 * @return \Illuminate\Pagination\Paginator
 	 */
 	protected function appendArray(array $keys)
 	{
@@ -287,7 +287,7 @@ class Paginator implements ArrayableInterface, ArrayAccess, Countable, IteratorA
 	 *
 	 * @param  string  $key
 	 * @param  string  $value
-	 * @return $this
+	 * @return \Illuminate\Pagination\Paginator
 	 */
 	public function addQuery($key, $value)
 	{
@@ -432,7 +432,7 @@ class Paginator implements ArrayableInterface, ArrayAccess, Countable, IteratorA
 	/**
 	 * Get an iterator for the items.
 	 *
-	 * @return \ArrayIterator
+	 * @return ArrayIterator
 	 */
 	public function getIterator()
 	{

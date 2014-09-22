@@ -3,6 +3,8 @@
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
+class DecryptException extends \RuntimeException {}
+
 class Encrypter {
 
 	/**
@@ -152,16 +154,9 @@ class Encrypter {
 	 *
 	 * @param  array  $payload
 	 * @return bool
-	 *
-	 * @throws \RuntimeException
 	 */
 	protected function validMac(array $payload)
 	{
-		if ( ! function_exists('openssl_random_pseudo_bytes'))
-		{
-			throw new \RuntimeException('OpenSSL extension is required.');
-		}
-
 		$bytes = (new SecureRandom)->nextBytes(16);
 
 		$calcMac = hash_hmac('sha256', $this->hash($payload['iv'], $payload['value']), $bytes, true);

@@ -1,6 +1,5 @@
 <?php namespace Illuminate\Http;
 
-use SplFileInfo;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
@@ -23,7 +22,7 @@ class Request extends SymfonyRequest {
 	/**
 	 * Return the Request instance.
 	 *
-	 * @return $this
+	 * @return \Illuminate\Http\Request
 	 */
 	public function instance()
 	{
@@ -121,7 +120,7 @@ class Request extends SymfonyRequest {
 	/**
 	 * Determine if the current request URI matches a pattern.
 	 *
-	 * @param  mixed  string
+	 * @param  dynamic  string
 	 * @return bool
 	 */
 	public function is()
@@ -155,26 +154,6 @@ class Request extends SymfonyRequest {
 	public function secure()
 	{
 		return $this->isSecure();
-	}
-
-	/**
-	 * Returns the client IP address.
-	 *
-	 * @return string
-	 */
-	public function ip()
-	{
-		return $this->getClientIp();
-	}
-
-	/**
-	 * Returns the client IP addresses.
-	 *
-	 * @return array
-	 */
-	public function ips()
-	{
-		return $this->getClientIps();
 	}
 
 	/**
@@ -235,7 +214,7 @@ class Request extends SymfonyRequest {
 	 */
 	public function all()
 	{
-		return array_replace_recursive($this->input(), $this->files->all());
+		return array_merge_recursive($this->input(), $this->files->all());
 	}
 
 	/**
@@ -346,14 +325,9 @@ class Request extends SymfonyRequest {
 	 */
 	public function hasFile($key)
 	{
-		if ( ! is_array($files = $this->file($key))) $files = array($files);
+		if (is_array($file = $this->file($key))) $file = head($file);
 
-		foreach ($files as $file)
-		{
-			if ($file instanceof SplFileInfo && $file->getPath() != '') return true;
-		}
-
-		return false;
+		return $file instanceof \SplFileInfo && $file->getPath() != '';
 	}
 
 	/**
@@ -409,7 +383,7 @@ class Request extends SymfonyRequest {
 	/**
 	 * Flash only some of the input to the session.
 	 *
-	 * @param  mixed  string
+	 * @param  dynamic  string
 	 * @return void
 	 */
 	public function flashOnly($keys)
@@ -422,7 +396,7 @@ class Request extends SymfonyRequest {
 	/**
 	 * Flash only some of the input to the session.
 	 *
-	 * @param  mixed  string
+	 * @param  dynamic  string
 	 * @return void
 	 */
 	public function flashExcept($keys)

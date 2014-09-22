@@ -250,9 +250,6 @@ class ServerVersion28 extends ServerProfile
             'pfadd'                     => 'Predis\Command\HyperLogLogAdd',
             'pfcount'                   => 'Predis\Command\HyperLogLogCount',
             'pfmerge'                   => 'Predis\Command\HyperLogLogMerge',
-
-            /* remote server control commands */
-            'command'                   => 'Predis\Command\ServerCommand',
         );
     }
 }

@@ -125,9 +125,18 @@ class CobrosController extends \BaseController {
 	public function show_estado_de_cuenta()
 	{
 		$params=Input::get();
-		if (isset($params['nocuenta']) && isset($params['ciclosid'])) 
+		if (isset($params['nocuenta'])) 
 		{
-		
+				if (!isset($params['ciclosid'])) {
+					$params['ciclosid']=DB::table('cuatrimestre_cursado')
+									->join('ciclos','cuatrimestre_cursado.idciclo','=','ciclos.id')
+									->where('cuatrimestre_cursado.nocuenta',$params['nocuenta'])
+									->Select(
+									db::raw("max(cuatrimestre_cursado.grado) as grado"),
+									db::raw('max(cuatrimestre_cursado.idciclo) as ciclo'))->get();
+					$params['ciclosid']=$params['ciclosid'][0]->ciclo;
+
+				}
 				$alumnos_cobros= DB::table('alumnos_cobros')
 				->join('alumno', 'alumnos_cobros.nocuenta', '=','alumno.nocuenta')
 				->join('cobros', 'alumnos_cobros.cobros_id', '=','cobros.id_cobro')

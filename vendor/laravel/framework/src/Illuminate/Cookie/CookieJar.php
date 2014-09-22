@@ -101,7 +101,7 @@ class CookieJar {
 	/**
 	 * Queue a cookie to send with the next response.
 	 *
-	 * @param  mixed
+	 * @param  dynamic
 	 * @return void
 	 */
 	public function queue()
@@ -145,7 +145,7 @@ class CookieJar {
 	 *
 	 * @param  string  $path
 	 * @param  string  $domain
-	 * @return $this
+	 * @return self
 	 */
 	public function setDefaultPathAndDomain($path, $domain)
 	{
