@@ -13,10 +13,19 @@
 
  */
 
+//App::before(function($request) {
+//    //header('Access-Control-Allow-Origin: *');
+//    header('Access-Control-Allow-Methods: GET,POST,OPTIONS,PUT,DELETE');
+//    header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//    header('Access-Control-Allow-Credentials: true');
+//});
 App::before(function($request) {
-#	if(!Route::get('user/{nocuenta}/{password}', array('as' => 'user', 'uses' => 'usuariosController@show'))
-#	{
-#	}
+    if (Request::getMethod() == "OPTIONS") {
+        $headers = array(
+            'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Headers' => 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Auth-Token',);
+        return Response::make('', 200, $headers);
+    }
 });
 
 
@@ -36,16 +45,18 @@ App::after(function($request, $response) {
  */
 
 Route::filter('auth', function($route = null) {
-    if (!Session::has('user')) {
-        return json_encode(array('error' => true, 'message' => 'The user is not logged in'));
-    } else {
-        $aHeaders = getallheaders();
-        if (!isset($aHeaders['Authorization'])){
+    $aHeaders = getallheaders();
+    if (!(isset($aHeaders['Origin'])&&$aHeaders['Origin'] == 'http://laravel.localhost')) {
+        if (!Session::has('user')) {
             return json_encode(array('error' => true, 'message' => 'The user is not logged in'));
-        }
-        if (isset($aHeaders['Authorization'])) {
-            if (Session::get('_token') != $aHeaders['Authorization']) {
-                return json_encode(array('error' => true, 'message' => 'Wrong Token'));
+        } else {
+            if (!isset($aHeaders['Authorization'])) {
+                return json_encode(array('error' => true, 'message' => 'The user is not logged in'));
+            }
+            if (isset($aHeaders['Authorization'])) {
+                if (Session::get('_token') != $aHeaders['Authorization']) {
+                    return json_encode(array('error' => true, 'message' => 'Wrong Token'));
+                }
             }
         }
     }

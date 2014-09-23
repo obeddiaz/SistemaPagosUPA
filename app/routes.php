@@ -10,6 +10,8 @@
   | and give it the Closure to execute when that URI is requested.
   |
  */
+
+header('Access-Control-Allow-Origin: http://laravel.localhost');
 Route::get('/', function() {
     return 'user no logged';
 });
@@ -70,10 +72,40 @@ Route::group(array('prefix' => '/api', 'before' => 'auth'), function() {
         Route::post('/create', array('as' => 'cobros', 'uses' => 'CobrosController@create_alumno'));
     });
     Route::group(array('prefix' => '/ciclos'), function() {
-        Route::get('/', array('as' => 'cobros', 'uses' => 'CobrosController@index'));
-        Route::get('/show/{id}', array('as' => 'cobros', 'uses' => 'CobrosController@show'));
-        Route::get('/show_by_nocuenta', array('as' => 'estado_de_cuenta_alumno', 'uses' => 'CiclosController@show_by_nocuenta'));
+        Route::get('/', array('as' => 'cobros', 'uses' => 'CiclosController@index'));
+        Route::get('/show/{id}', array('as' => 'cobros', 'uses' => 'CiclosController@show'));
+        Route::get('/show', array('as' => 'estado_de_cuenta_alumno', 'uses' => 'CiclosController@show_by_nocuenta'));
     });
 });
 
 Route::get('user/{nocuenta}/{password}', array('as' => 'user', 'uses' => 'usuariosController@show'));
+
+//App::missing(function($exception)
+//{
+//    //ar_dump($exception);
+//    //return Response::view('errors.missing', array(), 404);
+//    Log::error($exception);
+////
+//    $message = $exception->getMessage();
+//    var_dump($message);
+////
+////    // switch statements provided in case you need to add
+////    // additional logic for specific error code.
+////    switch ($code) {
+////        case 401:
+////            return Response::json(array(
+////                    'code'      =>  401,
+////                    'message'   =>  $message
+////                ), 401);
+////        case 404:
+////            $message            = (!$message ? $message = 'the requested resource was not found' : $message);
+////            return Response::json(array(
+////                    'code'      =>  404,
+////                    'message'   =>  $message
+////                ), 404);        
+////    }
+//});
+
+App::missing(function($e) {
+    return json_encode(array('error'=>true,'message'=>'There are something Wrong. Error 404','response'=>''));
+});
