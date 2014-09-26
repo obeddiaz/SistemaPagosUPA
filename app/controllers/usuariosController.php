@@ -58,7 +58,8 @@ class UsuariosController extends \BaseController {
 		    ->first();
 		    //$token = hash('sha256',uniqid(),false);
 		    if ($user){
-		    	Session::put('user',$user);
+                        $results[] = $user->toArray();
+		    	Session::put('user',$results);
 		    	return json_encode(Session::all());
 		    }
 		    else{
