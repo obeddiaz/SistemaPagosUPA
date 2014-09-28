@@ -43,10 +43,11 @@ class UsuariosController extends \BaseController {
 	 * @param  string  $password
 	 * @return Response
 	 */
-	public function show($nocuenta,$password)
+	public function login()
 	{
-		$user=Usuarios::where('alumno.nocuenta', $nocuenta)
-			->where('persona.password', '=',hash('md5',$password,false))
+		$params=Input::get();
+		$user=Usuarios::where('alumno.nocuenta', $params['u'])
+			->where('persona.password', '=',hash('md5',$params['p'],false))
 			->join('persona', 'alumno.idpersonas', '=', 'persona.idpersonas')
 			->select(
 				'alumno.nocuenta',
@@ -54,7 +55,12 @@ class UsuariosController extends \BaseController {
 				'persona.apellidopat',
 				'persona.apellidomat',
 				'persona.email',
-				'persona.password')
+				'persona.password',
+				'persona.alumno_activo',
+				'persona.admin_activo',
+				'persona.profesor_activo',
+				'persona.operativo_activo',
+				'persona.externo_activo')
 		    ->first();
 		    //$token = hash('sha256',uniqid(),false);
 		    if ($user){
@@ -63,8 +69,40 @@ class UsuariosController extends \BaseController {
 		    	return json_encode(Session::all());
 		    }
 		    else{
-		    	return json_encode(array("error"=>"User or password Incorrect"));
+				$user=Usuarios::where('persona.nombre', $params['u'])
+					->where('persona.password', '=',$params['p'])
+					->join('persona', 'alumno.idpersonas', '=', 'persona.idpersonas')
+					->select(
+						'alumno.nocuenta',
+						'persona.nombre',
+						'persona.apellidopat',
+						'persona.apellidomat',
+						'persona.email',
+						'persona.password',
+						'persona.alumno_activo',
+						'persona.admin_activo',
+						'persona.profesor_activo',
+						'persona.operativo_activo',
+						'persona.externo_activo')
+				    ->first();		    	
+				if ($user){
+                    $results[] = $user->toArray();
+			    	Session::put('user',$results);
+			    	return json_encode(Session::all());
+			    }
+			    else{
+		    		return json_encode(array("error"=>"User or password Incorrect"));
+		    	}
 		    }
+	}
+
+	public function show()
+	{
+		if (Session::has('user')) {
+			return json_encode(array("error"=>false,'message'=>"The user is not logged in",'response'=> array(Session::all(),200)));
+		} else {
+			return json_encode(array("error"=>true,'message'=>"The user is not logged in",'response'=>array('',404)));
+		}
 	}
 
 	/**

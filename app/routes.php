@@ -78,7 +78,10 @@ Route::group(array('prefix' => '/api', 'before' => 'auth'), function() {
     });
 });
 
-Route::get('user/{nocuenta}/{password}', array('as' => 'user', 'uses' => 'usuariosController@show'));
+Route::group(array('prefix' => '/user'), function() {
+    Route::get('/login', array('as' => 'user', 'uses' => 'usuariosController@login'));
+    Route::get('/show', array('as' => 'user', 'uses' => 'usuariosController@show'));
+});
 
 //App::missing(function($exception)
 //{

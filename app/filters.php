@@ -50,7 +50,7 @@ Route::filter('auth', function($route = null) {
         if (!Session::has('user')) {
             return json_encode(array('error' => true, 'message' => 'The user is not logged in'));
         } else {
-            if (!isset($aHeaders['Authorization'])) {
+        if (!isset($aHeaders['Authorization'])) {
                 return json_encode(array('error' => true, 'message' => 'The user is not logged in'));
             }
             if (isset($aHeaders['Authorization'])) {
