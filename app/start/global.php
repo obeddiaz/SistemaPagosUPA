@@ -80,3 +80,4 @@ App::down(function()
 require app_path().'/filters.php';
 
 app_path().'/helpers/cobros_helper.php';
+app_path().'/helpers/PDF_helper.php';

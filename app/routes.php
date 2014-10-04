@@ -11,12 +11,15 @@
   |
  */
 
-header('Access-Control-Allow-Origin: http://laravel.localhost');
+#header('Access-Control-Allow-Origin: http://laravel.localhost');
 Route::get('/', function() {
-    return 'user no logged';
+
 });
 Route::group(array('prefix' => '/api', 'before' => 'auth'), function() {
 
+    Route::group(array('prefix' => '/reportes'), function() {
+        Route::get('/matriculas_adeudos', array('uses' => 'ReportesController@show_nocueta_adeudos'));
+    });
     //resource conceptos 
     Route::group(array('prefix' => '/conceptos'), function() {
         Route::get('/', array('uses' => 'ConceptosController@index'));
