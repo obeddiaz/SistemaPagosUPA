@@ -41,18 +41,17 @@ Route::group(array('prefix' => '/api', 'before' => 'auth'), function() {
     //resource Personas
     Route::group(array('prefix' => '/personas'), function() {
         Route::get('/', array('as' => 'personas', 'uses' => 'PersonasController@index'));
-        Route::get('/alumno/nombre/', array('as' => 'personas_alumno_nombre', 'uses' => 'PersonasController@show_alumno_by_nombre'));
-        Route::get('/admin/{id?}', array('as' => 'personas_admin', 'uses' => 'PersonasController@show_admin'));
-        Route::get('/alumno/{id?}', array('as' => 'personas_alumno', 'uses' => 'PersonasController@show_alumno'));
-        Route::get('/profesor/{id?}', array('as' => 'personas_alumno', 'uses' => 'PersonasController@show_profesor'));
-        Route::get('/{id}', array('as' => 'persona_by_id', 'uses' => 'PersonasController@show'));
-        Route::get('/alumno/matricula/{nocuenta}', array('as' => 'personas_alumno_matricula', 'uses' => 'PersonasController@show_alumno_by_nocuenta'));
+        Route::get('/alumno/nombre', array('as' => 'personas_alumno_nombre', 'uses' => 'PersonasController@show_alumno_by_nombre'));
+        Route::get('/admin', array('as' => 'personas_admin', 'uses' => 'PersonasController@show_admin'));
+        Route::get('/alumno', array('as' => 'personas_alumno', 'uses' => 'PersonasController@show_alumno'));
+        Route::get('/profesor', array('as' => 'personas_alumno', 'uses' => 'PersonasController@show_profesor'));
+        Route::get('/persona', array('as' => 'persona_by_id', 'uses' => 'PersonasController@show'));
     });
 
     Route::group(array('prefix' => '/nivel_academico'), function() {
         Route::get('/', array('as' => 'nivel_academico', 'uses' => 'NivelesController@index'));
-        Route::get('/show_by_id/{id}', array('as' => 'nivel_academico', 'uses' => 'NivelesController@show'));
-        Route::get('/show_by_matricula/{nocuenta}', array('as' => 'nivel_academico_alumno', 'uses' => 'NivelesController@show_by_nocuenta'));
+        Route::get('/show_by_id/', array('as' => 'nivel_academico', 'uses' => 'NivelesController@show'));
+        Route::get('/show_by_matricula/', array('as' => 'nivel_academico_alumno', 'uses' => 'NivelesController@show_by_nocuenta'));
     });
 
     Route::group(array('prefix' => '/becas'), function() {

@@ -9,10 +9,7 @@ class NivelesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$niveles_info=Niveles::Select(
-			'*'
-			)
-			->get();
+		$niveles_info=Niveles::all();
 		if($niveles_info)
 		{
 			echo json_encode(array('error' => false,'messsage'=>'','response'=>$niveles_info));
@@ -30,10 +27,13 @@ class NivelesController extends \BaseController {
 	public function create()
 	{
 		$params=Input::get();
+
 		$info= array('nombre' => $params['nombre'],
 			'descripcion' => $params['descripcion'],
 			'estatus' => $params['estatus']);
+
 		$id_niveles=Niveles::InsertGetId($info);
+		
 		if ($id_niveles) {
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'New ciclo created ID'.$id_niveles));
 		} else {
@@ -61,34 +61,34 @@ class NivelesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$niveles_info=Niveles::Select(
-		'*'
-		)
-		->where('niveles_academicos.id', $id)
-		->first();
-		if($niveles_info)
-		{
-			echo json_encode(array('error' => false,'messsage'=>'','response'=>$niveles_info));
+		$params=Input::get();
+		if (isset($params['id'])) {
+			$niveles_info=Niveles::find($params['id']);
+			if($niveles_info)
+			{
+				echo json_encode(array('error' => false,'messsage'=>'','response'=>$niveles_info));
+			} else {
+				echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+			}
 		} else {
-			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+			echo json_encode(array('error' => true,'messsage'=>'Parameters missing','response'=>''));
 		}
 	}
 
-	public function show_by_nocuenta($nocuenta)
-
+	public function show_by_nocuenta()
 	{
-		$niveles_info=Niveles::Select(
-		'niveles_academicos.*'
-		)
-		->join('curso', 'curso.nivel', '=', 'niveles_academicos.idnivel')
-		->join('alumno', 'curso.idcurso', '=', 'alumno.idcurso' )
-		->where('alumno.nocuenta', $nocuenta)
-		->first();
-		if($niveles_info)
+		$params=Input::get();
+		if (isset($params['nocuenta'])) 
 		{
-			echo json_encode(array('error' => false,'messsage'=>'','response'=>$niveles_info));
+			$niveles_info=Niveles::getNivelesbyNocuenta($params['nocuenta']);
+			if($niveles_info)
+			{
+				echo json_encode(array('error' => false,'messsage'=>'','response'=>$niveles_info));
+			} else {
+				echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+			}
 		} else {
-			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+			echo json_encode(array('error' => true,'messsage'=>'Parameters missing','response'=>''));	
 		}
 	}
 	/**
@@ -112,16 +112,15 @@ class NivelesController extends \BaseController {
 	public function update()
 	{
 		$params=Input::get();
-		try {
-			$id=$params['id'];
-			unset($params['id']);
-
-			DB::table('niveles_academicos')
-					->where('id', $id)
-	        ->update($params);	
-	    echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Update'));
-		} catch (Exception $e) {
-			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	
+		if (isset($params['id'])) {
+			try {
+				Niveles::updateNiveleAcademico($params);
+			    echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Update'));
+			} catch (Exception $e) {
+				echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	
+			}
+		} else {
+			echo json_encode(array('error' => true,'messsage'=>'Parameters missing','response'=>''));		
 		}
 		
 	}
@@ -135,12 +134,18 @@ class NivelesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		try {
-			DB::table('niveles_academicos')->where('id', '=', $id)->delete();
-			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Delete'));
-		} catch (Exception $e) {
-			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));		
+		$params=Input::get();
+		if (isset($params['id'])) {
+			try {
+				Niveles::deleteNivelAcademico($params);
+				echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Delete'));
+			} catch (Exception $e) {
+				echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));		
+			}
+		} else {
+			echo json_encode(array('error' => true,'messsage'=>'Parameters missing','response'=>''));		
 		}
+
 	}
 
 
