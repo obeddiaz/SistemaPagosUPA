@@ -122,7 +122,7 @@ class CobrosController extends \BaseController {
 		{
 				if (!isset($params['ciclosid'])) {
 					$params['ciclosid']=Cobros::getGradoCiclo($params);
-					$params['ciclosid']=$params['ciclosid'][0]->ciclo;
+					$params['ciclosid']=$params['ciclosid'][0]->ciclo;//qué onda con esto
 
 				}
 				$alumnos_cobros= Cobros::getEdoCuenta($params);
