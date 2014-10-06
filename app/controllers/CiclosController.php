@@ -9,10 +9,7 @@ class CiclosController extends \BaseController {
 	 */
 	public function index()
 	{
-		$ciclos_info=Ciclos::Select(
-			'*'
-			)
-			->get();
+		$ciclos_info=Ciclos::getAll();
 		if($ciclos_info)
 		{
 			echo json_encode(array('error' => false,'messsage'=>'','response'=>$ciclos_info));
@@ -31,8 +28,8 @@ class CiclosController extends \BaseController {
 	{
 		$params=Input::post();
 		$info=array(
-				'descripcion'=>$params['descripcion'],
-				'abreviacion'=>$params['abreviacion']
+				'descripcion'=>$params->descripcion,
+				'abreviacion'=>$params->abreviacion
 			);
 		$id_ciclo=Ciclos::InsertGetId($info);
 		if ($id_ciclo) {
@@ -63,11 +60,7 @@ class CiclosController extends \BaseController {
 	public function show()
 	{
 		$params=Input::get();
-		$ciclos_info=Ciclos::Select(
-		'*'
-		)
-		->where('ciclos.id', $params['id'])
-		->first();
+		$ciclos_info=Ciclos::show($params);
 		if($ciclos_info)
 		{
 			echo json_encode(array('error' => false,'messsage'=>'','response'=>$ciclos_info));
@@ -80,12 +73,7 @@ class CiclosController extends \BaseController {
 	public function show_by_nocuenta()
 	{
 		$params=Input::get();
-		$ciclos_info=Ciclos::Select(
-		'ciclos.*'
-		)
-		->join('cuatrimestre_cursado', 'cuatrimestre_cursado.idciclo', '=','ciclos.id')
-		->where('cuatrimestre_cursado.nocuenta', $params['nocuenta'])
-		->get();
+		$ciclos_info=Ciclos::showByNoCuenta($params);
 		if($ciclos_info)
 		{
 			echo json_encode(array('error' => false,'messsage'=>'','response'=>$ciclos_info));
@@ -115,9 +103,7 @@ class CiclosController extends \BaseController {
 	{
 		$params=Input::get();
 		try {
-			DB::table('ciclos')
-				->where('id', $params['id'])
-	        	->update($params);	
+			Ciclos::update($params);
 	    	echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Update'));
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	
@@ -136,7 +122,7 @@ class CiclosController extends \BaseController {
 	{
 		$params=Input::post();
 		try {
-			DB::table('ciclos')->where('id', '=', $params['id'])->delete();
+			Ciclos::destroy($params);
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Delete'));
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));		

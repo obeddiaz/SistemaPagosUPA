@@ -4,9 +4,7 @@ class GradosController extends \BaseController {
 
 	public function index()
 	{
-		$cuatrimestre_cursado=Grados::Select(
-			'*')
-			->get();
+		$cuatrimestre_cursado=Grados::getAll();
 		if($cuatrimestre_cursado)
 		{
 			echo json_encode(array('error' => false,'messsage'=>'','response'=>$cuatrimestre_cursado));
@@ -25,11 +23,11 @@ class GradosController extends \BaseController {
 		$params=Input::get();
 		try {
 			$info=array(
-				'nocuenta'=>$params['nocuenta'],
-				'idcurso'=>$params['idcurso'],
-				'grado'=>$params['grado']
+				'nocuenta'=>$params->nocuenta,
+				'idcurso'=>$params->idcurso,
+				'grado'=>$params->grado
 			);
-			DB::table('cuatrimestre_cursado')->Insert($info);
+			Grados::create($info);
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'New cuatrimestre cursado'));	
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));
@@ -63,11 +61,8 @@ class GradosController extends \BaseController {
 	public function show_by_nocuenta($nocuenta)
 	{
 
-		$cuatrimestre_info=Grados::Select(
-		'*'
-		)
-		->where('cuatrimestre_cursado.nocuenta', $nocuenta)
-		->get();
+		$cuatrimestre_info=Grados::showByNocuenta($nocuenta);
+
 		if($cuatrimestre_info)
 		{
 			echo json_encode(array('error' => false,'messsage'=>'','response'=>$cuatrimestre_info));
@@ -116,13 +111,7 @@ class GradosController extends \BaseController {
 	{
 		$params=Input::get();
 		try {
-			$nocuenta=$params['nocuenta'];
-			unset($params['nocuenta']);
-
-			DB::table('cuatrimestre_cursado')
-					->where('nocuenta', $nocuenta)
-					->where('grado',$params['grado'])
-	        		->update($params);	
+		Grados::update($params);
 	    echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Update'));
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	
@@ -141,10 +130,7 @@ class GradosController extends \BaseController {
 	{
 		$params=Input::get();
 		try {
-			DB::table('cuatrimestre_cursado')
-				->where('nocuenta', '=', $params['nocuenta'])
-				->where('grado', '=', $params['grado'])
-				->delete();
+			Grados::destroy($params);
 			echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Delete'));
 		} catch (Exception $e) {
 			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));		
