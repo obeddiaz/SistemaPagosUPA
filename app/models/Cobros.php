@@ -22,7 +22,7 @@ class Cobros extends \Eloquent {
     }
 
     public static function getReferenciaInfo() {
-        $query=$tbl_alumnos->
+        $query=$tbl_alumnos
                 ->join('cobros', 'alumnos_cobros.cobros_id', '=', 'cobros.id_cobro')
                 ->join('alumno', 'alumnos_cobros.nocuenta', '=', 'alumno.nocuenta')
                 ->join('curso', 'curso.idcurso', '=', 'alumno.idcurso')

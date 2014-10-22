@@ -25,8 +25,9 @@ public static function InsertGetId()
 			->join('curso','curso.idcurso','=','alumno.idcurso')
 			->join('niveles_academicos','niveles_academicos.idnivel','=','curso.nivel')
 			->where('estatus_alumno.estatus', $params->estatus_alumno);
-		if($params->niveles_academicos!='TODOS')
+		if($params->niveles_academicos!='TODOS'){
 			$table->where('niveles_academicos.idnivel', $params->niveles_academicos);
+		}
 		$table->Select('becas_autorizadas.*','alumno.nocuenta','beca_tipo.beca','estatus_alumno.estatus','niveles_academicos.nombre');
 		return $query->get();
 }

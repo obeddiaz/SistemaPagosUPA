@@ -1,0 +1,117 @@
+<?php
+
+class referenciasController extends \BaseController {
+
+	/**
+	 * Display a listing of the resource.
+	 * GET /referencias
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		$referenciass_info=referenciass::getAll();
+		if($referenciass_info)
+		{
+			echo json_encode(array('error' => false,'messsage'=>'','response'=>$referenciass_info));
+		} else {
+			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+		}
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 * GET /referencias/create
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		$params=Input::get();
+
+		$nocuenta = $params->nocuenta;
+		$fecha_limite = $params->fecha_limite;
+		$nocontrol = $param->id_referencia_paquete_cobro //o algún número de control
+		$referencia = $nocuenta.$fecha_limite.$nocontrol;
+		
+		$info=array(
+		'matricula'=>$params->nocuenta,
+		'fecha_limite'=>$params->fecha_limite,
+		'alumnos_cobros_id'=>$params->alumnos_cobros_id,
+		'saldo'=>$params->saldo
+		);
+
+		$id_referencia=Referencias::create($info);
+		if ($id_referencia) {
+		echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'New referencia created ID'.$id_referencia));
+		} else {
+			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));
+		}
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 * POST /referencias
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		//
+	}
+
+	public function show()
+	{
+		$params=Input::get();
+		$referencia_info=Referencia::get($params->id);
+		if($referencia_info)
+		{
+			echo json_encode(array('error' => false,'messsage'=>'','response'=>$referencia_info));
+		} else {
+			echo json_encode(array('error' => true,'messsage'=>'No data','response'=>''));
+		}		
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 * GET /referencias/{id}/edit
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		//
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 * PUT /referencias/{id}
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+		try {
+			$params=Input::get();
+			Referencias::update($id, $params);
+		    echo json_encode(array('error' => false,'messsage'=>'Response Ok','response'=>'Success Update'));
+		} catch (Exception $e) {
+			echo json_encode(array('error' => true,'messsage'=>'Bad Response','response'=>'Failed'));	
+		}
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 * DELETE /referencias/{id}
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		//
+	}
+
+}
